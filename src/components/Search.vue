@@ -1,41 +1,59 @@
 <template>
   <div class="search">
 
-    <h2>CIV 6 DATABASE SEARCH</h2>
-    <h3>Lorem lip sum</h3>
+    <h3>CIV 6 DATABASE SEARCH</h3>
+    <h4>[ explain purpose here ]</h4>
 
-    <!-- TODO: add search form -->
-    <div class="mdl-grid search-container">
-      <div class="mdl-cell mdl-cell--10-col mdl-cell--6-col-tablet mdl-cell--4-col-phone">
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 90%">
-          <input class="mdl-textfield__input" type="text" id="keyword" v-model="keyword">
-          <label class="mdl-textfield__label" for="keyword">Enter keyword</label>
+    <form action="#">
+      <div class="mdl-grid search-container">
+        <div class="mdl-cell mdl-cell--10-col mdl-cell--6-col-tablet mdl-cell--4-col-phone">
+            <label class="mdl-button mdl-js-button mdl-button--icon" for="sample6">
+              <i class="material-icons">search</i>
+            </label>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 90%">
+            <input class="mdl-textfield__input" type="text" id="keyword" v-model="keyword">
+            <label class="mdl-textfield__label" for="keyword">Enter keyword</label>
+          </div>
+        </div>
+        <div class="mdl-cell mdl-cell--2-col mdl-cell--2-col-tablet mdl-cell--4-col-phone">
+          <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" :disabled="!isSearchable" @click="searchArtifacts" style="margin-top:12px;">Search</button>
         </div>
       </div>
-      <div class="mdl-cell mdl-cell--2-col mdl-cell--2-col-tablet mdl-cell--4-col-phone">
-        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" :disabled="!isSearchable" @click="searchArtifacts" style="margin-top:12px;">Search</button>
+
+      <div class="loader" v-if="loading">
+        <img src="../assets/spinner2.gif" />
       </div>
-    </div>
 
-    <div class="loader" v-if="loading">
-      <img src="../assets/spinner2.gif" />
-    </div>
-
-    <div class="content" v-if="!loading">
-      <div v-for="(artifact, index1) in artifacts" :key="index1">
-        <div class="mdl-grid" v-for="(item, index2) in artifact.items" :key="index2">
-          <div class="mdl-cell mdl-cell--12-col item--header" v-if="index2 === 0">{{ artifact.header }}</div>
-          <div class="mdl-cell mdl-cell--2-col item--key">{{ item.key }}</div>
-          <div class="mdl-cell mdl-cell--10-col item--value">{{ item.value }}</div>
+      <div class="mdl-grid search-container" v-if="!loading && !isEmpty">
+        <div class="mdl-cell mdl-cell--10-col mdl-cell--6-col-tablet mdl-cell--4-col-phone">
+          <label class="mdl-button mdl-js-button mdl-button--icon" for="sample6">
+            <i class="material-icons">search</i>
+          </label>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 90%">
+            <input class="mdl-textfield__input" type="text" v-model="searchQuery" id="searchQuery">
+            <label class="mdl-textfield__label" for="searchQuery">Filter results</label>
+          </div>
+        </div>
+        <div class="mdl-cell mdl-cell--2-col mdl-cell--2-col-tablet mdl-cell--4-col-phone">
+          <span class="mdl-badge" :data-badge="filteredCount" style="margin-top:16px;">Found</span>
         </div>
       </div>
-      <ul class="errors" v-if="errors && errors.length">
-        <li v-for="(error, index) of errors" :key="index">
-          {{ error.message }}
-        </li>
-      </ul>
-    </div>
 
+      <div class="content" v-if="!loading">
+        <div v-for="(artifact, index1) in filteredArtifacts" :key="index1">
+          <div class="mdl-grid" v-for="(item, index2) in artifact.items" :key="index2">
+            <div class="mdl-cell mdl-cell--12-col item--header" v-if="index2 === 0">{{ artifact.header }}</div>
+            <div class="mdl-cell mdl-cell--2-col mdl-cell--2-col-tablet mdl-cell--1-col-phone item--key">{{ item.key }}</div>
+            <div class="mdl-cell mdl-cell--10-col mdl-cell--5-col-tablet mdl-cell--3-col-phone item--value">{{ item.value }}</div>
+          </div>
+        </div>
+        <ul class="errors" v-if="errors && errors.length">
+          <li v-for="(error, index) of errors" :key="index">
+            {{ error.message }}
+          </li>
+        </ul>
+      </div>
+    </form>
   </div>
 </template>
 
@@ -68,6 +86,22 @@ export default {
   computed: {
     isSearchable () {
       return this.keyword.length > 0
+    },
+    filteredArtifacts: function () {
+      var self = this
+      return self.artifacts.filter(artefact => {
+        var searchRegex = new RegExp(self.searchQuery, 'i')
+        return (
+          searchRegex.test(artefact.header) ||
+          artefact.items.filter(i => searchRegex.test(i.key) || searchRegex.test(i.value)).length > 0
+        )
+      })
+    },
+    filteredCount: function () {
+      return (this.filteredArtifacts.length > 99 ? '+99' : this.filteredArtifacts.length)
+    },
+    isEmpty: function () {
+      return this.artifacts.length === 0
     }
   },
 
@@ -75,6 +109,8 @@ export default {
     return {
       loading: true,
       keyword: '',
+      searchQuery: '',
+      searchQueryCount: 0,
       artifacts: [],
       errors: []
     }
@@ -105,7 +141,7 @@ export default {
         this.artifacts = MOCKUP_DATA
         console.log('> searchArtifacts():', {keyword: this.keyword, data: MOCKUP_DATA})
         this.loading = false
-      }, 1300)
+      }, 1000)
     }
   }
 }
@@ -118,6 +154,8 @@ export default {
   }
   .search-container {
     max-width: 800px;
+    background-color: rgba(0,0,0,.03);
+    border-radius: 3px;
   }
   .content {
     padding: 30px;
@@ -125,7 +163,6 @@ export default {
   .errors {
     color: red;
   }
-
   .item--header {
     color: navy;
     text-align: left;
@@ -140,6 +177,12 @@ export default {
   .item--value {
     text-align: left;
     font-weight: bold;
+  }
+  form {
+    margin-bottom: 100px;
+  }
+  .loader {
+    margin-top: 40px;
   }
 
   h1,
