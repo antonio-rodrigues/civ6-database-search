@@ -1,8 +1,13 @@
 <template>
   <div class="search">
 
-    <h3>CIV 6 DATABASE SEARCH</h3>
-    <h4>[ explain purpose here ]</h4>
+    <h3>CIV 6 DATABASE</h3>
+    <h4>Search for internal configuration keys</h4>
+
+    <p>
+    Example search: America, Galley, Redcoat_disembark...<br />
+    <small>Note: some keys hold `true` or `false` for `1` and `0` values (boolean database field types).</small>
+    </p>
 
     <form action="#">
       <div class="mdl-grid search-container">
@@ -12,7 +17,7 @@
             </label>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 90%">
             <input class="mdl-textfield__input" type="text" id="keyword" v-model="keyword">
-            <label class="mdl-textfield__label" for="keyword">Enter keyword</label>
+            <label class="mdl-textfield__label" for="keyword">Enter configuration keyword</label>
           </div>
         </div>
         <div class="mdl-cell mdl-cell--2-col mdl-cell--2-col-tablet mdl-cell--4-col-phone">
@@ -30,8 +35,8 @@
             <i class="material-icons">search</i>
           </label>
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 90%">
-            <input class="mdl-textfield__input" type="text" v-model="searchQuery" id="searchQuery">
-            <label class="mdl-textfield__label" for="searchQuery">Filter results</label>
+            <input class="mdl-textfield__input" type="text" v-model="filterQuery" id="filterQuery">
+            <label class="mdl-textfield__label" for="filterQuery">Filter results</label>
           </div>
         </div>
         <div class="mdl-cell mdl-cell--2-col mdl-cell--2-col-tablet mdl-cell--4-col-phone">
@@ -44,7 +49,12 @@
           <div class="mdl-grid" v-for="(item, index2) in artifact.items" :key="index2">
             <div class="mdl-cell mdl-cell--12-col item--header" v-if="index2 === 0">{{ artifact.header }}</div>
             <div class="mdl-cell mdl-cell--2-col mdl-cell--2-col-tablet mdl-cell--1-col-phone item--key">{{ item.key }}</div>
-            <div class="mdl-cell mdl-cell--10-col mdl-cell--5-col-tablet mdl-cell--3-col-phone item--value">{{ item.value }}</div>
+            <div class="mdl-cell mdl-cell--10-col mdl-cell--5-col-tablet mdl-cell--3-col-phone item--value" v-if="!item.isLink">{{ item.value }}</div>
+            <div class="mdl-cell mdl-cell--10-col mdl-cell--5-col-tablet mdl-cell--3-col-phone item--value" v-if="item.isLink">
+              <button class="mdl-button mdl-js-button mdl-button--primary" @click="searchArtifactsByLink(item.value)">
+                {{ item.value }}
+              </button>
+            </div>
           </div>
         </div>
         <ul class="errors" v-if="errors && errors.length">
@@ -78,6 +88,17 @@ const MOCKUP_DATA = [
       { key: 'UnitAbilityType', value: 'ABILITY_GREAT_EXPLORER' },
       { key: 'ModifierId', value: 'REDCOAT_DISEMBARK' }
     ]
+  },
+  {
+    header: '_CityNames_',
+    items: [
+      { key: 'ID', value: '869' },
+      { key: 'CivilizationType', value: 'CIVILIZATION_PORTUGAL' },
+      { key: 'LeaderType', value: 'NULL' },
+      { key: 'ContinentType', value: 'NULL' },
+      { key: 'CityName', value: 'Porto' },
+      { key: 'SortIndex', value: '0' }
+    ]
   }
 ]
 
@@ -85,12 +106,12 @@ export default {
   name: 'Search',
   computed: {
     isSearchable () {
-      return this.keyword.length > 0
+      return this.keyword.length > 2
     },
     filteredArtifacts: function () {
       var self = this
       return self.artifacts.filter(artefact => {
-        var searchRegex = new RegExp(self.searchQuery, 'i')
+        var searchRegex = new RegExp(self.filterQuery, 'i')
         return (
           searchRegex.test(artefact.header) ||
           artefact.items.filter(i => searchRegex.test(i.key) || searchRegex.test(i.value)).length > 0
@@ -109,8 +130,8 @@ export default {
     return {
       loading: true,
       keyword: '',
-      searchQuery: '',
-      searchQueryCount: 0,
+      filterQuery: '',
+      filterQueryCount: 0,
       artifacts: [],
       errors: []
     }
@@ -123,25 +144,40 @@ export default {
 
   methods: {
     searchArtifacts: function () {
-      this.loading = true
+      const self = this
+      self.loading = true
       // http://www.acloudfor4.com/civ6sql/api/search/artifacts/keyword (some webservice returning JSON...)
       // HTTP.get(`artifacts/${this.keyword}`)
       //   .then(response => {
       //     // TODO: use map(), filter(), reduce() as you like to model your data...
-      //     this.artifacts = response
-      //     this.loading = false
+      //     self.artifacts = response
+      //     self.loading = false
       //   })
       //   .catch(e => {
-      //     this.errors.push(e)
-      //     this.loading = false
+      //     self.errors.push(e)
+      //     self.loading = false
       //   })
 
       // [MOCKUP] simulate network load......
       setTimeout(() => {
-        this.artifacts = MOCKUP_DATA
-        console.log('> searchArtifacts():', {keyword: this.keyword, data: MOCKUP_DATA})
-        this.loading = false
+        // add auto-search links to key:value where appropriate
+        const withLinks = Array.of(MOCKUP_DATA)
+        withLinks.map(artefact => {
+          artefact.forEach(header => {
+            header.items.map(i => {
+              Object.assign(i, {isLink: i.value.indexOf('_') >= 0})
+            })
+          })
+        })
+        this.artifacts = withLinks[0]
+        console.log('> searchArtifacts():', {keyword: self.keyword, data: withLinks[0]})
+        self.loading = false
       }, 1000)
+    },
+    searchArtifactsByLink: function (subkey) {
+      this.filterQuery = '' // reset filtered results
+      this.keyword = subkey
+      this.searchArtifacts()
     }
   }
 }
@@ -177,9 +213,14 @@ export default {
   .item--value {
     text-align: left;
     font-weight: bold;
+    padding-left: 10px;
+  }
+  .item--value button {
+    margin-top: -8px;
+    margin-left: -16px;
   }
   form {
-    margin-bottom: 100px;
+    margin: 60px 0 100px 0;
   }
   .loader {
     margin-top: 40px;

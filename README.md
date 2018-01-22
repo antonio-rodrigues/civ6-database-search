@@ -1,6 +1,6 @@
 # civ6-database-search
 
-> Search artefacts mod helper
+> Search for internal configuration keys (MOD Helper)
 
 ## Build Setup
 
