@@ -2,6 +2,9 @@
 // Template version: 1.3.1
 // see http://vuejs-templates.github.io/webpack for documentation.
 
+// Update if you change virtual-site on server
+const ONLINE_SERVER_ROOT = 'civ6tools'
+
 const path = require('path')
 
 module.exports = {
@@ -50,7 +53,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
+	assetsPublicPath: '/' + ONLINE_SERVER_ROOT + '/',
 
     /**
      * Source Maps

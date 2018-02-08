@@ -1,10 +1,11 @@
 import axios from 'axios' // http helper lib
 
 export const HTTP = axios.create({
-  // TODO: change URL to your base endpoint!
-  // Example: http://www.acloudfor4.com/civ6sql/api/search/
-  baseURL: `http://jsonplaceholder.typicode.com/`,
-  headers: {
-    Authorization: 'Bearer {token}'
-  }
+  // change URL to your base endpoint!
+  baseURL: 'http://www.acloudfor4.com/civ6datasvc/Service1.svc/rest/civ6data.api'
+  // headers: {
+  //   Authorization: 'Bearer {token}'
+  // }
 })
+
+export const ApiMethod = 'GetDataProps'
