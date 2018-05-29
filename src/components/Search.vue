@@ -4,11 +4,7 @@
     <h3>CIV 6 DATABASE</h3>
     <h4>Search for internal configuration keys</h4>
 
-    <Language
-      class="language-selector"
-      :defaultLang="lang"
-      @onLanguageChange="onLanguageChange"
-    />
+    <Language class="language-selector" :defaultLang="lang" @onLanguageChange="onLanguageChange" />
 
     <p>
       Example search: America, Galley, Redcoat_disembark...
@@ -80,7 +76,7 @@
 <script>
 import { HTTP, ApiMethod } from '../shared/http-common'
 import BackToTop from 'vue-backtotop'
-import Language from './Language'
+// import Language from './Language'
 
 const DEFAULT_LANG = 'en_US'
 
@@ -176,7 +172,6 @@ export default {
     }
   },
   components: {
-    Language,
     BackToTop
   }
 }
@@ -184,97 +179,98 @@ export default {
 
 <!-- "scoped" attribute: limit CSS to this component only -->
 <style scoped>
-  .language-selector {
-    position: absolute;
-    top: 10px;
-    right: 0;
-  }
-  .vue-back-to-top {
-    background-color: forestgreen;
-    opacity: .5;
-  }
+.language-selector {
+  position: absolute;
+  top: 10px;
+  right: 0;
+}
 
-  .mdl-cell {
-    /* border: 1px solid black; */
-  }
+.vue-back-to-top {
+  background-color: forestgreen;
+  opacity: .5;
+}
 
-  .search-container {
-    max-width: 800px;
-    background-color: rgba(0, 0, 0, .03);
-    border-radius: 3px;
-  }
+.mdl-cell {
+  /* border: 1px solid black; */
+}
 
+.search-container {
+  max-width: 800px;
+  background-color: rgba(0, 0, 0, .03);
+  border-radius: 3px;
+}
+
+.content {
+  padding: 30px;
+}
+
+.errors {
+  color: red;
+}
+
+.item--header {
+  color: navy;
+  text-align: left;
+  font-weight: bold;
+  font-size: 1.6rem;
+  /* border-top: 1px solid rgba(0,0,0,.12); */
+  padding-top: 20px;
+}
+
+.item--key {
+  text-align: right;
+}
+
+.item--value {
+  text-align: left;
+  font-weight: bold;
+  padding-left: 10px;
+}
+
+.item--value button {
+  margin-top: -8px;
+  margin-left: -16px;
+}
+
+form {
+  margin: 60px 0 100px 0;
+}
+
+.loader {
+  margin-top: 40px;
+}
+
+h1,
+h2 {
+  font-weight: normal;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+a {
+  color: #42b983;
+}
+
+@media (max-width: 416px) {
   .content {
-    padding: 30px;
-  }
-
-  .errors {
-    color: red;
-  }
-
-  .item--header {
-    color: navy;
-    text-align: left;
-    font-weight: bold;
-    font-size: 1.6rem;
-    /* border-top: 1px solid rgba(0,0,0,.12); */
-    padding-top: 20px;
-  }
-
-  .item--key {
-    text-align: right;
-  }
-
-  .item--value {
-    text-align: left;
-    font-weight: bold;
-    padding-left: 10px;
-  }
-
-  .item--value button {
-    margin-top: -8px;
-    margin-left: -16px;
-  }
-
-  form {
-    margin: 60px 0 100px 0;
-  }
-
-  .loader {
-    margin-top: 40px;
-  }
-
-  h1,
-  h2 {
-    font-weight: normal;
-  }
-
-  ul {
-    list-style-type: none;
     padding: 0;
   }
-
-  li {
-    display: inline-block;
-    margin: 0 10px;
+  .item--key {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
   }
-
-  a {
-    color: #42b983;
+  .vue-back-to-top {
+    right: 25vw;
+    opacity: 1;
   }
-
-  @media (max-width: 416px) {
-    .content {
-      padding: 0;
-    }
-    .item--key {
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      overflow: hidden;
-    }
-    .vue-back-to-top {
-      right: 25vw;
-      opacity: 1;
-    }
-  }
+}
 </style>
