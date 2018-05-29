@@ -76,7 +76,7 @@
 <script>
 import { HTTP, ApiMethod } from '../shared/http-common'
 import BackToTop from 'vue-backtotop'
-// import Language from './Language'
+import Language from './Language'
 
 const DEFAULT_LANG = 'en_US'
 
@@ -172,6 +172,7 @@ export default {
     }
   },
   components: {
+    Language,
     BackToTop
   }
 }
