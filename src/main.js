@@ -1,15 +1,14 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
-import Vue from 'vue'
-import App from './App'
-import BackToTop from 'vue-backtotop'
+import Vue from "vue";
+import App from "./App.vue";
+import router from "./router";
+import store from "./store";
 
-Vue.use(BackToTop)
-Vue.config.productionTip = false
+// baseURL: 'http://www.acloudfor4.com/civ6datasvc/Service1.svc/rest/civ6data.api'
 
-/* eslint-disable no-new */
+Vue.config.productionTip = false;
+
 new Vue({
-  el: '#app',
-  components: { App },
-  template: '<App/>'
-})
+  router,
+  store,
+  render: h => h(App)
+}).$mount("#app");
