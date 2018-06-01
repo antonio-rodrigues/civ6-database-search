@@ -1,29 +1,41 @@
-// https://eslint.org/docs/user-guide/configuring
-
 module.exports = {
   root: true,
-  parserOptions: {
-    parser: 'babel-eslint'
+  settings: {
+    "html/indent": "0",
+    es6: true
   },
+  extends: ["plugin:vue/essential", "@vue/prettier"],
   env: {
-    browser: true,
+    node: true,
+    es6: true
   },
-  extends: [
-    // https://github.com/vuejs/eslint-plugin-vue#priority-a-essential-error-prevention
-    // consider switching to `plugin:vue/strongly-recommended` or `plugin:vue/recommended` for stricter rules.
-    'plugin:vue/essential', 
-    // https://github.com/standard/standard/blob/master/docs/RULES-en.md
-    'standard'
-  ],
-  // required to lint *.vue files
-  plugins: [
-    'vue'
-  ],
-  // add your custom rules here
+  parserOptions: {
+    parser: "babel-eslint"
+  },
   rules: {
-    // allow async-await
-    'generator-star-spacing': 'off',
-    // allow debugger during development
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
+    "no-console": process.env.NODE_ENV === "production" ? "error" : "off",
+    "no-debugger": process.env.NODE_ENV === "production" ? "error" : "off",
+    "prettier/prettier": "error",
+    "no-unused-vars": [
+      "warn",
+      {
+        varsIgnorePattern: "^_",
+        argsIgnorePattern: "^_"
+      }
+    ],
+    "prefer-const": [
+      "error",
+      {
+        destructuring: "any"
+      }
+    ],
+    "import/first": 0,
+    // "import/no-deprecated": process.env.NODE_ENV === "production" ? 0 : 1,
+    // "import/no-unresolved": ["error", { commonjs: true }],
+    // "import/named": "error",
+    "one-var": ["error", { initialized: "never" }],
+    "no-mixed-operators": 0,
+    "no-var": "error",
+    "require-await": "error"
   }
-}
+};
