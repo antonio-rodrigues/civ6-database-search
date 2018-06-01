@@ -17,3 +17,9 @@ npm run build
 # build for production and view the bundle analyzer report
 npm run build --report
 ```
+
+## Used libs & reference
+
+https://vuematerial.io
+
+https://material.io/tools/icons/?style=baseline
