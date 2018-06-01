@@ -12,7 +12,17 @@
     </p>
 
     <form action="#">
-        <div class="mdl-grid search-container">
+
+        <md-content class="md-elevation-1">
+          <md-field>
+              <md-icon class="md-accent">search</md-icon>
+              <label>Enter configuration keyword (case sensitive)</label>
+              <md-input v-model="keyword"></md-input>
+            </md-field>
+            <md-button class="md-raised md-primary" :disabled="!isSearchable" @click="searchArtefacts">Search</md-button>
+        </md-content>
+
+        <!-- <div class="mdl-grid search-container">
             <div class="mdl-cell mdl-cell--10-col mdl-cell--6-col-tablet mdl-cell--4-col-phone">
                 <label class="mdl-button mdl-js-button mdl-button--icon" for="sample6">
                     <i class="material-icons">search</i>
@@ -26,13 +36,22 @@
                 <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" :disabled="!isSearchable" @click="searchArtefacts"
                     style="margin-top:12px;">Search</button>
             </div>
-        </div>
+        </div> -->
 
         <div class="loader" v-if="loading">
             <img src="@/assets/spinner2.gif" />
         </div>
 
-        <div class="mdl-grid search-container" v-if="!loading && !isEmpty">
+        <md-content class="md-elevation-1">
+          <md-field>
+              <md-icon class="md-accent">filter</md-icon>
+              <label>Filter results</label>
+              <md-input v-model="filterQuery"></md-input>
+            </md-field>
+        </md-content>
+
+
+        <!-- <div class="mdl-grid search-container" v-if="!loading && !isEmpty">
             <div class="mdl-cell mdl-cell--10-col mdl-cell--6-col-tablet mdl-cell--4-col-phone">
                 <label class="mdl-button mdl-js-button mdl-button--icon" for="sample6">
                     <i class="material-icons">search</i>
@@ -45,7 +64,7 @@
             <div class="mdl-cell mdl-cell--2-col mdl-cell--2-col-tablet mdl-cell--4-col-phone">
                 <span class="mdl-badge" :data-badge="filteredCount" style="margin-top:16px;">Found</span>
             </div>
-        </div>
+        </div> -->
 
         <div class="content" v-if="!loading">
             <div v-for="(artefact, index1) in filteredArtefacts" :key="index1">
@@ -67,5 +86,5 @@
             </ul>
         </div>
     </form>
-    
+
 </div>

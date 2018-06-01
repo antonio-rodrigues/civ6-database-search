@@ -3,7 +3,11 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 
-// baseURL: 'http://www.acloudfor4.com/civ6datasvc/Service1.svc/rest/civ6data.api'
+// external libs
+import VueMaterial from "vue-material";
+import "vue-material/dist/vue-material.min.css";
+
+Vue.use(VueMaterial);
 
 Vue.config.productionTip = false;
 
