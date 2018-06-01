@@ -1,6 +1,6 @@
 # coat-of-arms-civilization
 
-> Fansite of Sid Meier's Civilization games
+> Fansite of Sid Meier's Civilization  game series
 
 ## Build Setup
 
