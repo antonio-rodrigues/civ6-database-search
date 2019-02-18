@@ -22,22 +22,6 @@
             <md-button class="md-raised md-primary" :disabled="!isSearchable" @click="searchArtefacts">Search</md-button>
         </md-content>
 
-        <!-- <div class="mdl-grid search-container">
-            <div class="mdl-cell mdl-cell--10-col mdl-cell--6-col-tablet mdl-cell--4-col-phone">
-                <label class="mdl-button mdl-js-button mdl-button--icon" for="sample6">
-                    <i class="material-icons">search</i>
-                </label>
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 90%">
-                    <input class="mdl-textfield__input" type="text" id="keyword" v-model="keyword">
-                    <label class="mdl-textfield__label" for="keyword">Enter configuration keyword (case sensitive)</label>
-                </div>
-            </div>
-            <div class="mdl-cell mdl-cell--2-col mdl-cell--2-col-tablet mdl-cell--4-col-phone">
-                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" :disabled="!isSearchable" @click="searchArtefacts"
-                    style="margin-top:12px;">Search</button>
-            </div>
-        </div> -->
-
         <div class="loader" v-if="loading">
             <img src="@/assets/spinner2.gif" />
         </div>
@@ -49,22 +33,6 @@
               <md-input v-model="filterQuery"></md-input>
             </md-field>
         </md-content>
-
-
-        <!-- <div class="mdl-grid search-container" v-if="!loading && !isEmpty">
-            <div class="mdl-cell mdl-cell--10-col mdl-cell--6-col-tablet mdl-cell--4-col-phone">
-                <label class="mdl-button mdl-js-button mdl-button--icon" for="sample6">
-                    <i class="material-icons">search</i>
-                </label>
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 90%">
-                    <input class="mdl-textfield__input" type="text" v-model="filterQuery" id="filterQuery">
-                    <label class="mdl-textfield__label" for="filterQuery">Filter results</label>
-                </div>
-            </div>
-            <div class="mdl-cell mdl-cell--2-col mdl-cell--2-col-tablet mdl-cell--4-col-phone">
-                <span class="mdl-badge" :data-badge="filteredCount" style="margin-top:16px;">Found</span>
-            </div>
-        </div> -->
 
         <div class="content" v-if="!loading">
             <div v-for="(artefact, index1) in filteredArtefacts" :key="index1">
