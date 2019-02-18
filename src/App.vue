@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-
     <div class="page-container">
       <md-app md-waterfall md-mode="fixed-last">
         <md-app-toolbar class="md-large md-dense md-primary">
@@ -23,7 +22,9 @@
           <div class="md-toolbar-row">
             <md-tabs class="md-primary">
               <md-tab id="tab-home" md-label="Home" to="/"></md-tab>
-              <md-tab id="tab-mod-tools" md-label="Mod Tools" to="/search">Mod Tools</md-tab>
+              <md-tab id="tab-mod-tools" md-label="Mod Tools" to="/search"
+                >Mod Tools</md-tab
+              >
               <md-tab id="tab-about" md-label="About" to="/about">About</md-tab>
             </md-tabs>
           </div>
@@ -56,12 +57,11 @@
         </md-app-drawer> -->
 
         <md-app-content>
-          <router-view/>
+          <router-view />
         </md-app-content>
       </md-app>
     </div>
   </div>
-
 </template>
 
 <script>

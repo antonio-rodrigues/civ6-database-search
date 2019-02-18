@@ -1,7 +1,11 @@
 <template>
   <div class="select-style">
     <select v-model="selectedLanguage" @change="onChangeLanguage">
-      <option v-for="language in languages" :key="language.value" :value="language.value">
+      <option
+        v-for="language in languages"
+        :key="language.value"
+        :value="language.value"
+      >
         {{ language.name }}
       </option>
     </select>
