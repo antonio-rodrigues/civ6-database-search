@@ -1,5 +1,5 @@
 <template>
-  <div class="my-page-unique-name">
+  <div class="my-page-unique-name coa-padding-s">
     <h1>Insert your HMTL here!</h1>
 
     <button @click="onButtonClick">MY BUTTON</button>
@@ -115,22 +115,29 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// SCSS quick reference: https://medium.freecodecamp.org/the-complete-guide-to-scss-sass-30053c266b23
+/// SCSS quick reference: https://medium.freecodecamp.org/the-complete-guide-to-scss-sass-30053c266b23
 
-// this is a way to contain styles to a specific page, if we dont want to use "scoped" above
-// Note: "scoped" ==> all styles are specific to this page, and won't bleed outside of it
+/// this is a way to contain styles to a specific page, if we dont want to use "scoped" above
+/// Note: "scoped" ==> all styles are specific to this page, and won't bleed outside of it
+
+/// -- Import from global shared styles
+/// Variables are prefixed like '$color-xxxx' or '$size-xx'
+/// For global padding and vertical spacing, please make use of
+/// shared classes at HTML level, ex: '<div class=coa-vspacing-xx />'
+/// Note: we use 'coa' prefix so we can distinguish from 'md-xxxx' classes
+@import "@/styles/index.scss";
+
 .my-page-unique-name {
-  // general or shared styles
-  padding: 10px;
+  // page shared styles
   margin: 0;
-  background-color: #fff;
+  background-color: $color-white;
 
   ul > li {
     color: orangered;
   }
 
   .my-button {
-    background-color: silver;
+    background-color: $color-grey;
     color: black;
 
     // you can nest selectors
@@ -145,7 +152,7 @@ export default {
       color: white;
       border: 1px solid yellow;
     }
-    // all above are equal to: ".my-button__red {...}" and ".my-button__blue {...}"
+    /// all above are equal to: ".my-button__red {...}" and ".my-button__blue {...}"
   }
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div class="page-header">
     <h1 class="md-display-1">{{ title }}</h1>
     <h3 v-if="subHeader" class="md-headline">{{ subHeader }}</h3>
   </div>
@@ -16,7 +16,9 @@ export default {
 </script>
 
 <style lang="scss">
-a {
-  color: #42b983;
+// @import "@/styles/index.scss";
+
+.page-header {
+  background-color: transparent;
 }
 </style>

@@ -10,13 +10,15 @@
 </template>
 
 <style lang="scss" scoped>
+@import "@/styles/index.scss";
+
 .panel {
-  padding: 10px 20px;
-  background-color: rgba(0, 0, 0, 0.12);
+  padding: $size-s $size-m;
+  background-color: $color-grey;
 }
 .title {
-  color: orangered;
+  color: $color-warn;
   opacity: 0.8; /// match md-warn color
-  border-bottom: 1px dashed orangered;
+  border-bottom: 1px dashed $color-warn;
 }
 </style>
