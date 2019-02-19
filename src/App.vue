@@ -8,7 +8,7 @@
               <md-icon>menu</md-icon>
             </md-button>
 
-            <span class="md-title">My Title</span>
+            <span class="md-title">C-O-A</span>
           </div>
 
           <div class="md-toolbar-section-end">
@@ -21,12 +21,12 @@
         <div class="md-toolbar-row">
           <md-tabs class="md-primary">
             <md-tab id="tab-home" md-label="Home" to="/"></md-tab>
-            <md-tab id="tab-pages-civ-1" md-label="Civ.1" to="/civ/1" replace></md-tab>
-            <md-tab id="tab-pages-civ-2" md-label="Civ.2" to="/civ/2" replace></md-tab>
-            <md-tab id="tab-pages-civ-3" md-label="Civ.3" to="/civ/3" replace></md-tab>
-            <md-tab id="tab-pages-civ-4" md-label="Civ.4" to="/civ/4"></md-tab>
-            <md-tab id="tab-pages-civ-5" md-label="Civ.5" to="/civ/5"></md-tab>
             <md-tab id="tab-pages-civ-6" md-label="Civ.6" to="/civ/6"></md-tab>
+            <md-tab id="tab-pages-civ-5" md-label="Civ.5" to="/civ/5"></md-tab>
+            <md-tab id="tab-pages-civ-4" md-label="Civ.4" to="/civ/4"></md-tab>
+            <md-tab id="tab-pages-civ-3" md-label="Civ.3" to="/civ/3" replace></md-tab>
+            <md-tab id="tab-pages-civ-2" md-label="Civ.2" to="/civ/2" replace></md-tab>
+            <md-tab id="tab-pages-civ-1" md-label="Civ.1" to="/civ/1" replace></md-tab>
             <md-tab id="tab-favorites" md-label="About" to="/about"></md-tab>
           </md-tabs>
         </div>
@@ -59,7 +59,7 @@
       </md-app-drawer>
 
       <md-app-content>
-        <router-view />
+        <router-view/>
       </md-app-content>
     </md-app>
   </div>
@@ -75,7 +75,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .md-app {
   min-height: 100vh;
   border: 1px solid rgba(#000, 0.12);
@@ -84,5 +84,44 @@ export default {
 .md-drawer {
   width: 300px;
   max-width: calc(100vw - 125px);
+}
+
+/**
+* Shared core helper classes
+* (because <styles /> is not scoped, this classes are available to any component)
+* TODO: move this to SCSS isolated helper files
+*/
+
+/// Global padding
+.coa-padding {
+  &-s {
+    padding: 5px;
+  }
+  &-m {
+    padding: 10px;
+  }
+  &-l {
+    padding: 20px;
+  }
+  &-xl {
+    padding: 40px;
+  }
+}
+
+/// To keep vertical rhythm, alwways use this vertical spacing after containers,
+/// try not to use top-margin or top-padding
+.coa-vspacing {
+  &-s {
+    margin-bottom: 5px;
+  }
+  &-m {
+    margin-bottom: 10px;
+  }
+  &-l {
+    margin-bottom: 20px;
+  }
+  &-xl {
+    margin-bottom: 40px;
+  }
 }
 </style>
