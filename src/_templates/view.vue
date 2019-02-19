@@ -13,6 +13,7 @@
 
     <p>Add image example:</p>
     <img src="@/assets/logo.png">
+    <!-- <img src="@/assets/logo.png"> -->
 
     <p>Component with props example:</p>
     <LanguageSelector :defaultLang="lang" @onLanguageChange="onLanguageChange"/>
