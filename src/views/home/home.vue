@@ -1,5 +1,5 @@
 <template>
-  <div class="page-home">
+  <div class="page-home coa-vspacing-s">
     <PageHeader title="[ HOMEPAGE ]"/>
     <!-- [ add page content here ] -->
   </div>
@@ -18,8 +18,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "@/styles/index.scss";
+
 .page-home {
-  padding: 10px;
   margin: 0;
   background-color: #fff;
 }

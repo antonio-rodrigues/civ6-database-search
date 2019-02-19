@@ -1,5 +1,5 @@
 <template>
-  <div class="page-civ-6">
+  <div class="page-civ-6 coa-padding-s">
     <PageHeader title="CIV-6 DATABASE" subHeader="Search for internal configuration keys"/>
 
     <LanguageSelector
@@ -178,14 +178,15 @@
 </script>
 
 <style lang="scss" scoped>
+@import "@/styles/index.scss";
+
 .page-civ-6 {
-  padding: 10px;
   margin: 0;
-  background-color: #fff;
+  background-color: $color-white;
 
   .language-selector {
     position: absolute;
-    top: 10px;
+    top: $size-s;
     right: 0;
   }
 

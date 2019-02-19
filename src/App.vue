@@ -76,6 +76,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import "@/styles/index.scss";
+
 .md-app {
   min-height: 100vh;
   border: 1px solid rgba(#000, 0.12);
@@ -84,44 +86,5 @@ export default {
 .md-drawer {
   width: 300px;
   max-width: calc(100vw - 125px);
-}
-
-/**
-* Shared core helper classes
-* (because <styles /> is not scoped, this classes are available to any component)
-* TODO: move this to SCSS isolated helper files
-*/
-
-/// Global padding
-.coa-padding {
-  &-s {
-    padding: 5px;
-  }
-  &-m {
-    padding: 10px;
-  }
-  &-l {
-    padding: 20px;
-  }
-  &-xl {
-    padding: 40px;
-  }
-}
-
-/// To keep vertical rhythm, alwways use this vertical spacing after containers,
-/// try not to use top-margin or top-padding
-.coa-vspacing {
-  &-s {
-    margin-bottom: 5px;
-  }
-  &-m {
-    margin-bottom: 10px;
-  }
-  &-l {
-    margin-bottom: 20px;
-  }
-  &-xl {
-    margin-bottom: 40px;
-  }
 }
 </style>

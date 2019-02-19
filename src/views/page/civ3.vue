@@ -1,5 +1,5 @@
 <template>
-  <div class="page-civ-3">
+  <div class="page-civ-3 coa-padding-s">
     <h1 class="md-display-1">{{ pageTitle }}</h1>
     <!-- [ add here specific Civ-version content ] -->
   </div>
@@ -65,9 +65,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "@/styles/index.scss";
+
 .page-civ-3 {
-  padding: 10px;
   margin: 0;
-  background-color: #fff;
+  background-color: $color-white;
 }
 </style>
