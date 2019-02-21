@@ -14,11 +14,11 @@
 
 .panel {
   padding: $size-s $size-m;
-  background-color: $color-grey;
+  background-color: $color-secondary-ligth;
+  opacity: 0.8;
 }
 .title {
-  color: $color-warn;
-  opacity: 0.8; /// match md-warn color
-  border-bottom: 1px dashed $color-warn;
+  color: $color-info;
+  border-bottom: 1px dashed $color-info;
 }
 </style>

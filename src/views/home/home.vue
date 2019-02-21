@@ -1,5 +1,5 @@
 <template>
-  <div class="page-home coa-vspacing-s">
+  <div class="page-home coa-padding-s">
     <PageHeader title="[ HOMEPAGE ]" />
     <!-- [ add page content here ] -->
   </div>
@@ -22,6 +22,7 @@ export default {
 
 .page-home {
   margin: 0;
-  background-color: #fff;
+  padding: $size-s $size-m;
+  background-color: $color-white;
 }
 </style>

@@ -85,9 +85,14 @@ export default {
 <style lang="scss">
 @import "@/styles/index.scss";
 
+/// MD overrides
+.md-app-content {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
 .md-app {
   min-height: 100vh;
-  border: 1px solid rgba(#000, 0.12);
 }
 
 .md-drawer {

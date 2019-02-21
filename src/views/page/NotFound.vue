@@ -1,8 +1,8 @@
 <template>
-  <div class="page-not-found coa-padding-s">
-    <h1 class="md-display-1">{{ pageTitle }}</h1>
+  <div class="page-not-found">
+    <h1 class="md-display-1 title">{{ pageTitle }}</h1>
     <h4 class="md-title">The page you are trying to access was not found!</h4>
-    <img src="@/assets/404.jpg" alt="" />
+    <img class="open-arms" src="@/assets/404.jpg" />
   </div>
 </template>
 
@@ -73,14 +73,19 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: calc(100vh - 140px);
+  height: calc(100vh - 96px);
   margin: 0;
-  background-color: $color-black;
-  color: $color-white;
+  padding: 0;
+  background-color: $color-grey-dark;
+  color: $color-text-invert;
   // background: url('../../assets/404.jpg') center no-repeat;
 
-  h1 {
+  .title {
     color: $color-warn;
+  }
+
+  img.open-arms {
+    border-radius: 15px;
   }
 }
 </style>

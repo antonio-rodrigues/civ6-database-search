@@ -69,6 +69,7 @@ export default {
 
 .page-civ-1 {
   margin: 0;
+  padding: $size-s $size-m;
   background-color: $color-white;
 }
 </style>
