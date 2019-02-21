@@ -65,6 +65,9 @@ export default {
     };
   },
 
+  /// Lifecycle diagram:
+  //    https://vuejs.org/images/lifecycle.png
+
   // lifecycle: init
   beforeCreate() {
     console.group("[LIFECYCLE]");
