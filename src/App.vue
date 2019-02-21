@@ -4,7 +4,10 @@
       <md-app-toolbar class="md-large md-dense md-primary">
         <div class="md-toolbar-row">
           <div class="md-toolbar-section-start">
-            <md-button class="md-icon-button" @click="menuVisible = !menuVisible">
+            <md-button
+              class="md-icon-button"
+              @click="menuVisible = !menuVisible"
+            >
               <md-icon>menu</md-icon>
             </md-button>
 
@@ -33,7 +36,9 @@
       </md-app-toolbar>
 
       <md-app-drawer :md-active.sync="menuVisible">
-        <md-toolbar class="md-transparent" md-elevation="0">Navigation</md-toolbar>
+        <md-toolbar class="md-transparent" md-elevation="0"
+          >Navigation</md-toolbar
+        >
 
         <md-list>
           <md-list-item>
@@ -59,7 +64,9 @@
       </md-app-drawer>
 
       <md-app-content>
-        <router-view/>
+        <keep-alive>
+          <router-view />
+        </keep-alive>
       </md-app-content>
     </md-app>
   </div>

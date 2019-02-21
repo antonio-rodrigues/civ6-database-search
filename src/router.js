@@ -8,10 +8,12 @@ import Civ3 from "./views/page/civ3.vue";
 import Civ4 from "./views/page/civ4.vue";
 import Civ5 from "./views/page/civ5.vue";
 import Civ6 from "./views/page/civ6.vue";
+import NotFoundComponent from "./views/page/NotFound";
 
 Vue.use(Router);
 
 export default new Router({
+  mode: "history",
   routes: [
     {
       path: "/",
@@ -52,6 +54,8 @@ export default new Router({
       path: "/civ/6",
       name: "civ6",
       component: Civ6
-    }
+    },
+    // catch all, 404 not found
+    { path: "*", component: NotFoundComponent }
   ]
 });
