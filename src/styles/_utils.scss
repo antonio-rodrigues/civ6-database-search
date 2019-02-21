@@ -1,0 +1,61 @@
+/*
+* Helper classes
+*/
+
+/// -- Padding
+.coa-padding {
+  &-none {
+    padding: 0;
+  }
+  &-xs {
+    padding: $size-xs;
+  }
+  &-s {
+    padding: $size-s;
+  }
+  &-m {
+    padding: $size-m;
+  }
+  &-l {
+    padding: $size-l;
+  }
+  &-xl {
+    padding: $size-xl;
+  }
+  &-xxl {
+    padding: $size-xl;
+  }
+}
+
+/// -- Vertical spacing
+/// To keep vertical rhythm, always use this vertical spacing after containers,
+/// try not to use top-margin or top-padding
+.coa-vspacing {
+  &-none {
+    margin-bottom: 0;
+  }
+  &-xs {
+    margin-bottom: $size-xs;
+  }
+  &-s {
+    margin-bottom: $size-s;
+  }
+  &-m {
+    margin-bottom: $size-m;
+  }
+  &-l {
+    margin-bottom: $size-l;
+  }
+  &-xl {
+    margin-bottom: $size-xl;
+  }
+  &-xxl {
+    margin-bottom: $size-xxl;
+  }
+}
+
+/// Temporary visual helpers
+.x1 { border: 1px solid red; }
+.x2 { border: 1px solid blue; }
+.x3 { border: 1px solid green; }
+.x4 { border: 1px solid brown; }

@@ -1,0 +1,28 @@
+/// COA base theme colors
+$color-primary: #9abb50; // MD primary color
+$color-secondary: #3646a7; // MD accent color
+
+$color-primary-dark: #527a17;
+$color-primary-light: #c3d698;
+
+$color-secondary-dark: #17217a;
+$color-secondary-ligth: #9da6d8;
+
+/// COA generic theme colors
+$color-black: #000;
+$color-white: #fff;
+$color-grey: #9e9e9e;
+$color-grey-ligth: #fafafa;
+$color-grey-dark: #424242;
+
+/// COA elements color
+$color-text: #424242; // Gray 800
+$color-text-invert: #fAfAfA; // Gray 50
+
+/// COA action colors
+$color-danger: #e65100;
+$color-warn: #f57c00;
+$color-success: $color-primary-dark;
+$color-info: $color-secondary;
+
+/// Ref: https://material.io/design/color/the-color-system.html#tools-for-picking-colors
