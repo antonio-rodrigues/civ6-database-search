@@ -12,28 +12,31 @@
     </ul>
 
     <p>Add image example:</p>
-    <img src="@/assets/logo.png">
+    <img src="@/assets/logo.png" />
     <!-- <img src="@/assets/logo.png"> -->
 
     <p>Component with props example:</p>
-    <LanguageSelector :defaultLang="lang" @onLanguageChange="onLanguageChange"/>
+    <LanguageSelector
+      :defaultLang="lang"
+      @onLanguageChange="onLanguageChange"
+    />
 
     <button class="my-button">SCSS example</button>
-    <br>
+    <br />
     <button class="my-button my-button__red">SCSS example</button>
-    <br>
+    <br />
     <button class="my-button my-button__blue">SCSS example</button>
-    <br>
+    <br />
   </div>
 </template>
 
 <script>
 // import here any components or libs you need
-import { HTTP, ApiMethod } from "../../utils";
+// import { HTTP, ApiMethod } from "../../utils";
 import LanguageSelector from "@/components/LanguageSelector";
 
 // access VueX Redux store with getters
-import { mapActions } from "vuex";
+// import { mapActions } from "vuex";
 import { mapGetters } from "vuex";
 
 export default {

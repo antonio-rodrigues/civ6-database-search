@@ -1,6 +1,6 @@
 <template>
   <div class="page-home coa-vspacing-s">
-    <PageHeader title="[ HOMEPAGE ]"/>
+    <PageHeader title="[ HOMEPAGE ]" />
     <!-- [ add page content here ] -->
   </div>
 </template>
