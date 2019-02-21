@@ -19,14 +19,14 @@
         </div>
 
         <div class="md-toolbar-row">
-          <md-tabs class="md-primary">
+          <md-tabs class="md-primary" md-sync-route>
             <md-tab id="tab-home" md-label="Home" to="/"></md-tab>
             <md-tab id="tab-pages-civ-6" md-label="Civ.6" to="/civ/6"></md-tab>
             <md-tab id="tab-pages-civ-5" md-label="Civ.5" to="/civ/5"></md-tab>
             <md-tab id="tab-pages-civ-4" md-label="Civ.4" to="/civ/4"></md-tab>
-            <md-tab id="tab-pages-civ-3" md-label="Civ.3" to="/civ/3" replace></md-tab>
-            <md-tab id="tab-pages-civ-2" md-label="Civ.2" to="/civ/2" replace></md-tab>
-            <md-tab id="tab-pages-civ-1" md-label="Civ.1" to="/civ/1" replace></md-tab>
+            <md-tab id="tab-pages-civ-3" md-label="Civ.3" to="/civ/3"></md-tab>
+            <md-tab id="tab-pages-civ-2" md-label="Civ.2" to="/civ/2"></md-tab>
+            <md-tab id="tab-pages-civ-1" md-label="Civ.1" to="/civ/1"></md-tab>
             <md-tab id="tab-favorites" md-label="About" to="/about"></md-tab>
           </md-tabs>
         </div>

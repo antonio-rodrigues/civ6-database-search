@@ -1,6 +1,9 @@
 <template>
   <div class="page-civ-6 coa-padding-s">
-    <PageHeader title="CIV-6 DATABASE" subHeader="Search for internal configuration keys"/>
+    <PageHeader
+      title="CIV-6 DATABASE"
+      subHeader="Search for internal configuration keys"
+    />
 
     <LanguageSelector
       class="language-selector"
@@ -12,7 +15,10 @@
       <h4 slot="title">TIP</h4>
       <p>
         Example search: America, Galley, Redcoat_disembark...<br />
-        <small>Note: some keys hold `true` or `false` for `1` and `0` values (boolean database field types).</small>
+        <small
+          >Note: some keys hold `true` or `false` for `1` and `0` values
+          (boolean database field types).</small
+        >
       </p>
     </Panel>
 
@@ -27,11 +33,12 @@
           class="md-raised md-primary"
           :disabled="!isSearchable"
           @click="searchArtefacts"
-        >Search</md-button>
+          >Search</md-button
+        >
       </md-content>
 
       <div class="loader" v-if="loading">
-        <img src="@/assets/spinner2.gif">
+        <img src="@/assets/spinner2.gif" />
       </div>
 
       <md-content class="coa-vspacing-m" v-if="!isEmpty">
@@ -44,18 +51,28 @@
 
       <div class="content" v-if="!loading">
         <div v-for="(artefact, index1) in filteredArtefacts" :key="index1">
-          <div class="mdl-grid" v-for="(item, index2) in artefact.Rows" :key="index2">
+          <div
+            class="mdl-grid"
+            v-for="(item, index2) in artefact.Rows"
+            :key="index2"
+          >
             <div
               class="mdl-cell mdl-cell--12-col item--header"
               v-if="index2 === 0"
-            >{{ artefact.Header }}</div>
+            >
+              {{ artefact.Header }}
+            </div>
             <div
               class="mdl-cell mdl-cell--2-col mdl-cell--2-col-tablet mdl-cell--1-col-phone item--key"
-            >{{ item.Key }}</div>
+            >
+              {{ item.Key }}
+            </div>
             <div
               class="mdl-cell mdl-cell--10-col mdl-cell--5-col-tablet mdl-cell--3-col-phone item--value"
               v-if="!item.isLink"
-            >{{ item.Value }}</div>
+            >
+              {{ item.Value }}
+            </div>
             <div
               class="mdl-cell mdl-cell--10-col mdl-cell--5-col-tablet mdl-cell--3-col-phone item--value"
               v-if="item.isLink"
@@ -63,12 +80,16 @@
               <button
                 class="mdl-button mdl-js-button mdl-button--primary"
                 @click="searchArtefactsByLink(item.Value)"
-              >{{ item.Value }}</button>
+              >
+                {{ item.Value }}
+              </button>
             </div>
           </div>
         </div>
         <ul class="errors" v-if="errors && errors.length">
-          <li v-for="(error, index) of errors" :key="index">{{ error.message }}</li>
+          <li v-for="(error, index) of errors" :key="index">
+            {{ error.message }}
+          </li>
         </ul>
       </div>
     </form>
@@ -76,105 +97,105 @@
 </template>
 
 <script lang="js">
-  import { HTTP, ApiMethod, prepareArtefactsData } from "@/utils";
+import { HTTP, ApiMethod, prepareArtefactsData } from "@/utils";
 
-  import PageHeader from "@/components/PageHeader";
-  import Panel from "@/components/Panel";
-  import LanguageSelector from "@/components/LanguageSelector";
+import PageHeader from "@/components/PageHeader";
+import Panel from "@/components/Panel";
+import LanguageSelector from "@/components/LanguageSelector";
 
-  const DEFAULT_LANG = "en_US";
-  const page = { version: 6, name: "civ6", label: "CIV-6" };
+const DEFAULT_LANG = "en_US";
+const page = { version: 6, name: "civ6", label: "CIV-6" };
 
-  export default {
-    name: page.name,
+export default {
+  name: page.name,
 
-    computed: {
-      isSearchable() {
-        return this.keyword.length > 2;
-      },
-      filteredArtefacts: function() {
-        const self = this;
-        return self.artefacts.filter(artefact => {
-          const searchRegex = new RegExp(self.filterQuery, "i");
-          return (
-            searchRegex.test(artefact.Header) ||
-            artefact.Rows.filter(
-              i => searchRegex.test(i.Key) || searchRegex.test(i.Value)
-            ).length > 0
-          );
-        });
-      },
-      filteredCount: function() {
-        return this.filteredArtefacts.length > 99
-          ? "+99"
-          : this.filteredArtefacts.length;
-      },
-      isEmpty: function() {
-        return this.artefacts.length === 0;
-      }
+  computed: {
+    isSearchable() {
+      return this.keyword.length > 2;
     },
-
-    data() {
-      return {
-        lang: DEFAULT_LANG,
-        loading: true,
-        keyword: "",
-        filterQuery: "",
-        filterQueryCount: 0,
-        artefacts: [],
-        errors: []
-      };
+    filteredArtefacts: function() {
+      const self = this;
+      return self.artefacts.filter(artefact => {
+        const searchRegex = new RegExp(self.filterQuery, "i");
+        return (
+          searchRegex.test(artefact.Header) ||
+          artefact.Rows.filter(
+            i => searchRegex.test(i.Key) || searchRegex.test(i.Value)
+          ).length > 0
+        );
+      });
     },
-
-    created() {
-      // on-page-load
-      this.loading = false;
+    filteredCount: function() {
+      return this.filteredArtefacts.length > 99
+        ? "+99"
+        : this.filteredArtefacts.length;
     },
+    isEmpty: function() {
+      return this.artefacts.length === 0;
+    }
+  },
 
-    methods: {
-      onLanguageChange: function(lang) {
-        this.lang = lang;
-        if (this.keyword && this.keyword.length) {
-          // auto-repeat-search with selected lang
-          this.filterQuery = ""; // TODO: reset filtered results?
-          this.searchArtefacts();
-        }
-      },
-      searchArtefacts: function() {
-        const self = this;
-        self.loading = true;
+  data() {
+    return {
+      lang: DEFAULT_LANG,
+      loading: true,
+      keyword: "",
+      filterQuery: "",
+      filterQueryCount: 0,
+      artefacts: [],
+      errors: []
+    };
+  },
 
-        // endpoint parameters
-        const searchQuery = `${ApiMethod}?param=${self.keyword}&language=${
-          self.lang
-        }`;
+  created() {
+    // on-page-load
+    this.loading = false;
+  },
 
-        // get some data!
-        HTTP.get(searchQuery)
-          .then(response => prepareArtefactsData(response.data))
-          .then(results => {
-            this.artefacts = results;
-            // console.log('> searchArtefacts:', { keyword: self.keyword, results: results })
-            self.loading = false;
-          })
-          .catch(e => {
-            console.error(">> ERROR:", JSON.stringify(e));
-            self.errors.push(e);
-            self.loading = false;
-          });
-      },
-      searchArtefactsByLink: function(subkey) {
-        this.filterQuery = ""; // reset filtered results
-        this.keyword = subkey;
+  methods: {
+    onLanguageChange: function(lang) {
+      this.lang = lang;
+      if (this.keyword && this.keyword.length) {
+        // auto-repeat-search with selected lang
+        this.filterQuery = ""; // TODO: reset filtered results?
         this.searchArtefacts();
       }
     },
-    components: {
-      PageHeader,
-      Panel,
-      LanguageSelector
+    searchArtefacts: function() {
+      const self = this;
+      self.loading = true;
+
+      // endpoint parameters
+      const searchQuery = `${ApiMethod}?param=${self.keyword}&language=${
+        self.lang
+      }`;
+
+      // get some data!
+      HTTP.get(searchQuery)
+        .then(response => prepareArtefactsData(response.data))
+        .then(results => {
+          this.artefacts = results;
+          // console.log('> searchArtefacts:', { keyword: self.keyword, results: results })
+          self.loading = false;
+        })
+        .catch(e => {
+          console.error(">> ERROR:", JSON.stringify(e));
+          self.errors.push(e);
+          self.loading = false;
+        });
+    },
+    searchArtefactsByLink: function(subkey) {
+      this.filterQuery = ""; // reset filtered results
+      this.keyword = subkey;
+      this.searchArtefacts();
     }
-  };
+  },
+  components: {
+    PageHeader,
+    Panel,
+    LanguageSelector
+  }
+};
 </script>
 
 <style lang="scss" scoped>
