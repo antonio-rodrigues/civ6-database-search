@@ -1,16 +1,12 @@
 <template>
   <div class="page-container">
-    <md-app md-waterfall md-mode="fixed-last">
+    <md-app md-waterfall md-mode="fixed">
       <md-app-toolbar class="md-large md-dense md-primary">
         <div class="md-toolbar-row">
           <div class="md-toolbar-section-start">
-            <md-button
-              class="md-icon-button"
-              @click="menuVisible = !menuVisible"
-            >
+            <!-- <md-button class="md-icon-button" @click="menuVisible = !menuVisible">
               <md-icon>menu</md-icon>
-            </md-button>
-
+            </md-button>-->
             <span class="md-title">C-O-A</span>
           </div>
 
@@ -22,50 +18,57 @@
         </div>
 
         <div class="md-toolbar-row">
-          <md-tabs class="md-primary" md-sync-route>
-            <md-tab id="tab-home" md-label="Home" to="/"></md-tab>
-            <md-tab id="tab-pages-civ-6" md-label="Civ.6" to="/civ/6"></md-tab>
-            <md-tab id="tab-pages-civ-5" md-label="Civ.5" to="/civ/5"></md-tab>
-            <md-tab id="tab-pages-civ-4" md-label="Civ.4" to="/civ/4"></md-tab>
-            <md-tab id="tab-pages-civ-3" md-label="Civ.3" to="/civ/3"></md-tab>
-            <md-tab id="tab-pages-civ-2" md-label="Civ.2" to="/civ/2"></md-tab>
-            <md-tab id="tab-pages-civ-1" md-label="Civ.1" to="/civ/1"></md-tab>
-            <md-tab id="tab-favorites" md-label="About" to="/about"></md-tab>
-          </md-tabs>
+          <div class="coa-nav-bar">
+            <md-tabs class="md-primary" md-sync-route>
+              <md-tab id="tab-home" md-label="Home" to="/"></md-tab>
+              <md-tab id="tab-pages-civ-6" md-label="Civ-6" to="/civ/6"></md-tab>
+              <md-tab id="tab-pages-civ-5" md-label="Civ-5" to="/civ/5"></md-tab>
+              <md-tab id="tab-pages-civ-4" md-label="Civ-4" to="/civ/4"></md-tab>
+              <md-tab id="tab-pages-civ-3" md-label="Civ-3" to="/civ/3"></md-tab>
+              <md-tab id="tab-pages-civ-2" md-label="Civ-2" to="/civ/2"></md-tab>
+              <md-tab id="tab-pages-civ-1" md-label="Civ-1" to="/civ/1"></md-tab>
+              <md-tab id="tab-favorites" md-label="About" to="/about"></md-tab>
+            </md-tabs>
+          </div>
         </div>
       </md-app-toolbar>
 
       <md-app-drawer :md-active.sync="menuVisible">
-        <md-toolbar class="md-transparent" md-elevation="0"
-          >Navigation</md-toolbar
-        >
-
+        <md-toolbar class="md-transparent" md-elevation="0">Options</md-toolbar>
         <md-list>
           <md-list-item>
-            <md-icon>move_to_inbox</md-icon>
-            <span class="md-list-item-text">Inbox</span>
+            <md-icon>videogame_asset</md-icon>
+            <span class="md-list-item-text">CIV-6</span>
           </md-list-item>
-
           <md-list-item>
-            <md-icon>send</md-icon>
-            <span class="md-list-item-text">Sent Mail</span>
+            <md-icon>videogame_asset</md-icon>
+            <span class="md-list-item-text">CIV-5</span>
           </md-list-item>
-
           <md-list-item>
-            <md-icon>delete</md-icon>
-            <span class="md-list-item-text">Trash</span>
+            <md-icon>videogame_asset</md-icon>
+            <span class="md-list-item-text">CIV-4</span>
           </md-list-item>
-
           <md-list-item>
-            <md-icon>error</md-icon>
-            <span class="md-list-item-text">Spam</span>
+            <md-icon>videogame_asset</md-icon>
+            <span class="md-list-item-text">CIV-3</span>
+          </md-list-item>
+          <md-list-item>
+            <md-icon>videogame_asset</md-icon>
+            <span class="md-list-item-text">CIV-2</span>
+          </md-list-item>
+          <md-list-item>
+            <md-icon>videogame_asset</md-icon>
+            <span class="md-list-item-text">CIV-1</span>
+          </md-list-item>
+          <md-list-item>
+            <md-icon>info</md-icon>
+            <span class="md-list-item-text">About</span>
           </md-list-item>
         </md-list>
       </md-app-drawer>
-
       <md-app-content>
         <keep-alive>
-          <router-view />
+          <router-view/>
         </keep-alive>
       </md-app-content>
     </md-app>
@@ -91,12 +94,32 @@ export default {
   margin: 0 !important;
 }
 
+/// App styles
 .md-app {
-  min-height: 100vh;
+  height: 100%;
+  max-height: 100vh;
+}
+
+.md-app-toolbar {
+  height: 115px;
 }
 
 .md-drawer {
   width: 300px;
   max-width: calc(100vw - 125px);
+}
+
+.coa-nav-bar {
+  width: 100%;
+  max-width: 100%;
+  overflow: scroll;
+
+  // & ::-webkit-scrollbar {
+  //   width: 0px; /* remove scrollbar space */
+  //   background: transparent; /* optional: just make scrollbar invisible */
+  // }
+  // & ::-webkit-scrollbar-thumb {
+  //   background: #ff0000;
+  // }
 }
 </style>

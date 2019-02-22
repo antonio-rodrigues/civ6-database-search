@@ -46,7 +46,7 @@ export default {
     myCalculatedValue() {
       return this.myValue * 1000;
     },
-    hasItems: function() {
+    hasItems() {
       return !this.items.length;
     },
     ...mapGetters([
