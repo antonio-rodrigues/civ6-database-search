@@ -1,5 +1,5 @@
 <template>
-  <div class="page-container">
+  <div class="page-app">
     <md-app md-waterfall md-mode="fixed">
       <md-app-toolbar class="md-large md-dense md-primary">
         <div class="md-toolbar-row">
@@ -7,6 +7,9 @@
             <!-- <md-button class="md-icon-button" @click="menuVisible = !menuVisible">
               <md-icon>menu</md-icon>
             </md-button>-->
+            <md-avatar class="md-small">
+              <img src="@/assets/coa-flag.jpg" alt="avatar" />
+            </md-avatar>
             <span class="md-title">C-O-A</span>
           </div>
 
@@ -21,12 +24,36 @@
           <div class="coa-nav-bar">
             <md-tabs class="md-primary" md-sync-route>
               <md-tab id="tab-home" md-label="Home" to="/"></md-tab>
-              <md-tab id="tab-pages-civ-6" md-label="Civ-6" to="/civ/6"></md-tab>
-              <md-tab id="tab-pages-civ-5" md-label="Civ-5" to="/civ/5"></md-tab>
-              <md-tab id="tab-pages-civ-4" md-label="Civ-4" to="/civ/4"></md-tab>
-              <md-tab id="tab-pages-civ-3" md-label="Civ-3" to="/civ/3"></md-tab>
-              <md-tab id="tab-pages-civ-2" md-label="Civ-2" to="/civ/2"></md-tab>
-              <md-tab id="tab-pages-civ-1" md-label="Civ-1" to="/civ/1"></md-tab>
+              <md-tab
+                id="tab-pages-civ-6"
+                md-label="Civ-6"
+                to="/civ/6"
+              ></md-tab>
+              <md-tab
+                id="tab-pages-civ-5"
+                md-label="Civ-5"
+                to="/civ/5"
+              ></md-tab>
+              <md-tab
+                id="tab-pages-civ-4"
+                md-label="Civ-4"
+                to="/civ/4"
+              ></md-tab>
+              <md-tab
+                id="tab-pages-civ-3"
+                md-label="Civ-3"
+                to="/civ/3"
+              ></md-tab>
+              <md-tab
+                id="tab-pages-civ-2"
+                md-label="Civ-2"
+                to="/civ/2"
+              ></md-tab>
+              <md-tab
+                id="tab-pages-civ-1"
+                md-label="Civ-1"
+                to="/civ/1"
+              ></md-tab>
               <md-tab id="tab-favorites" md-label="About" to="/about"></md-tab>
             </md-tabs>
           </div>
@@ -68,7 +95,7 @@
       </md-app-drawer>
       <md-app-content>
         <keep-alive>
-          <router-view/>
+          <router-view />
         </keep-alive>
       </md-app-content>
     </md-app>
@@ -109,17 +136,17 @@ export default {
   max-width: calc(100vw - 125px);
 }
 
-.coa-nav-bar {
-  width: 100%;
-  max-width: 100%;
-  overflow: scroll;
+.page-app {
+  .md-avatar {
+    border: 1px solid $color-white;
+    margin: 0 0 0 $size-s;
+  }
 
-  // & ::-webkit-scrollbar {
-  //   width: 0px; /* remove scrollbar space */
-  //   background: transparent; /* optional: just make scrollbar invisible */
-  // }
-  // & ::-webkit-scrollbar-thumb {
-  //   background: #ff0000;
-  // }
+  /// Make tabs scrollable/swipeable
+  .coa-nav-bar {
+    width: 100%;
+    max-width: 100%;
+    overflow: scroll;
+  }
 }
 </style>
