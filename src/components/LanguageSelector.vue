@@ -66,7 +66,7 @@ $select-size: 250px;
 .select-style {
   width: 250px;
   border-radius: 3px;
-  background-color: $color-grey-ligth;
+  background-color: $color-primary-light;
   overflow: hidden;
   z-index: 999;
 }
