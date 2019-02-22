@@ -1,17 +1,22 @@
 <template>
   <div class="page-civ-6 coa-padding-s">
+    <LanguageSelector
+      class="language-selector"
+      label="History &amp; Descriptions locale"
+      :defaultLang="lang"
+      @onLanguageChange="onLanguageChange"
+    />
+
     <PageHeader
       title="CIV-6 DATABASE"
       subHeader="Search for internal configuration keys"
     />
 
-    <LanguageSelector
-      class="language-selector"
-      :defaultLang="lang"
-      @onLanguageChange="onLanguageChange"
-    />
-
-    <md-content md-tag>
+    <div class="search-tip" @click="onShowInfo">
+      <md-icon>info_outlined</md-icon>
+      <smal>How to?</smal>
+    </div>
+    <Panel v-if="showInfo">
       <h4 slot="title">TIP</h4>
       <p>
         Example search: America, Galley, Redcoat_disembark...<br />
@@ -20,18 +25,7 @@
           (boolean database field types).</small
         >
       </p>
-    </md-content>
-
-    <!-- <Panel>
-      <h4 slot="title">TIP</h4>
-      <p>
-        Example search: America, Galley, Redcoat_disembark...<br />
-        <small
-          >Note: some keys hold `true` or `false` for `1` and `0` values
-          (boolean database field types).</small
-        >
-      </p>
-    </Panel> -->
+    </Panel>
 
     <form action="#">
       <md-content class="coa-vspacing-l">
@@ -154,7 +148,8 @@ export default {
       filterQuery: "",
       filterQueryCount: 0,
       artefacts: [],
-      errors: []
+      errors: [],
+      showInfo: false
     };
   },
 
@@ -164,6 +159,9 @@ export default {
   },
 
   methods: {
+    onShowInfo: function() {
+      this.showInfo = !this.showInfo;
+    },
     onLanguageChange: function(lang) {
       this.lang = lang;
       if (this.keyword && this.keyword.length) {
@@ -219,8 +217,20 @@ export default {
 
   .language-selector {
     position: absolute;
-    top: $size-s;
-    right: 0;
+    top: 150px;
+    right: $size-l;
+  }
+
+  .search-tip {
+    display: inline-flex;
+    align-items: center;
+    color: $color-grey;
+    cursor: pointer;
+
+    & .md-icon {
+      position: relative;
+      left: 10px;
+    }
   }
 
   .vue-back-to-top {
@@ -293,9 +303,16 @@ export default {
     color: #42b983;
   }
 
-  @media (max-width: 416px) {
+  @media (max-width: 425px) {
     .content {
       padding: 0;
+    }
+    .language-selector {
+      position: relative;
+      top: 0;
+      right: 0;
+      width: 100%;
+      margin-bottom: $size-s;
     }
     .item--key {
       text-overflow: ellipsis;
@@ -306,6 +323,7 @@ export default {
       right: 25vw;
       opacity: 1;
     }
+
   }
 }
 </style>
