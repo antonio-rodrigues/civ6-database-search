@@ -1,12 +1,12 @@
 <template>
-  <div class="page-civ-5 coa-padding-s">
+  <div class="page-civ-4 coa-padding-s">
     <h1 class="md-display-1">{{ pageTitle }}</h1>
     <!-- [ add here specific Civ-version content ] -->
   </div>
 </template>
 
 <script>
-const page = { version: 5, name: "civ5", label: "CIV-5" };
+const page = { version: 4, name: "civ4", label: "CIV-4" };
 
 export default {
   name: page.name,
@@ -33,6 +33,7 @@ export default {
   mounted() {
     console.log("mounted(): component did mount");
     this.myLabel = "MyLabel is now updated!!!";
+    console.groupEnd();
   },
 
   // Updating (Re-render)
@@ -49,7 +50,6 @@ export default {
   },
   destroyed() {
     console.log("destroyed(): *PAW* You're gone for good!");
-    console.groupEnd();
   },
 
   methods: {
@@ -67,7 +67,7 @@ export default {
 <style lang="scss" scoped>
 @import "@/styles/index.scss";
 
-.page-civ-5 {
+.page-civ-4 {
   margin: 0;
   padding: $size-s $size-m;
   background-color: $color-white;

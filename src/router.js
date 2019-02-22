@@ -1,14 +1,14 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Home from "./views/home/home.vue";
-import About from "./views/about/about.vue";
-import Civ1 from "./views/page/civ1.vue";
-import Civ2 from "./views/page/civ2.vue";
-import Civ3 from "./views/page/civ3.vue";
-import Civ4 from "./views/page/civ4.vue";
-import Civ5 from "./views/page/civ5.vue";
-import Civ6 from "./views/page/civ6.vue";
-import NotFoundComponent from "./views/page/NotFound";
+import Home from "./views/pages/home/home.vue";
+import About from "./views/pages/about/about.vue";
+import Civ1 from "./views/pages/civ1/civ1.vue";
+import Civ2 from "./views/pages/civ2/civ2.vue";
+import Civ3 from "./views/pages/civ3/civ3.vue";
+import Civ4 from "./views/pages/civ4/civ4.vue";
+import Civ5 from "./views/pages/civ5/civ5.vue";
+import Civ6 from "./views/pages/civ6/civ6.vue";
+import NotFoundComponent from "./views/pages/NotFound";
 
 Vue.use(Router);
 

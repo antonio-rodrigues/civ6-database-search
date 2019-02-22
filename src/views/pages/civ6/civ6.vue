@@ -11,7 +11,7 @@
       @onLanguageChange="onLanguageChange"
     />
 
-    <Panel>
+    <md-content md-tag>
       <h4 slot="title">TIP</h4>
       <p>
         Example search: America, Galley, Redcoat_disembark...<br />
@@ -20,7 +20,18 @@
           (boolean database field types).</small
         >
       </p>
-    </Panel>
+    </md-content>
+
+    <!-- <Panel>
+      <h4 slot="title">TIP</h4>
+      <p>
+        Example search: America, Galley, Redcoat_disembark...<br />
+        <small
+          >Note: some keys hold `true` or `false` for `1` and `0` values
+          (boolean database field types).</small
+        >
+      </p>
+    </Panel> -->
 
     <form action="#">
       <md-content class="coa-vspacing-l">
