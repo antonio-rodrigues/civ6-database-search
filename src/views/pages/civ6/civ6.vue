@@ -14,7 +14,7 @@
 
     <div class="search-tip" @click="onShowInfo">
       <md-icon>info_outlined</md-icon>
-      <smal>How to?</smal>
+      <small>How to?</small>
     </div>
     <Panel v-if="showInfo">
       <h4 slot="title">TIP</h4>
@@ -46,7 +46,7 @@
         <img src="@/assets/spinner2.gif" />
       </div>
 
-      <md-content class="coa-vspacing-m" v-if="!isEmpty">
+      <md-content class="coa-vspacing-l" v-if="!isEmpty">
         <md-field>
           <md-icon class="md-accent">filter</md-icon>
           <label>Type to filter results...</label>
@@ -55,42 +55,30 @@
       </md-content>
 
       <div class="content" v-if="!loading">
+
         <div v-for="(artefact, index1) in filteredArtefacts" :key="index1">
-          <div
-            class="mdl-grid"
-            v-for="(item, index2) in artefact.Rows"
-            :key="index2"
-          >
-            <div
-              class="mdl-cell mdl-cell--12-col item--header"
-              v-if="index2 === 0"
-            >
+          <div class="md-layout md-gutter md-alignment-center-space-between coa-vspacing-m" v-for="(item, index2) in artefact.Rows" :key="index2">
+            <div v-if="index2 === 0" class="md-layout-item md-medium-size-100 coa-vspacing-m item--header">
               {{ artefact.Header }}
             </div>
-            <div
-              class="mdl-cell mdl-cell--2-col mdl-cell--2-col-tablet mdl-cell--1-col-phone item--key"
-            >
-              {{ item.Key }}
+            <div class="md-layout-item md-small-size-50 md-xsmall-size-100 item--key">
+              {{ item.Key || 'Unknow' }}:
             </div>
-            <div
-              class="mdl-cell mdl-cell--10-col mdl-cell--5-col-tablet mdl-cell--3-col-phone item--value"
-              v-if="!item.isLink"
-            >
-              {{ item.Value }}
+            <div v-if="!item.isLink" class="md-layout-item md-small-size-50 md-xsmall-size-100 item--value">
+              {{ artefact.Value || '--' }}
             </div>
-            <div
-              class="mdl-cell mdl-cell--10-col mdl-cell--5-col-tablet mdl-cell--3-col-phone item--value"
-              v-if="item.isLink"
-            >
+            <div v-if="item.isLink" class="md-layout-item md-small-size-50 md-xsmall-size-100 item--value">
               <button
                 class="mdl-button mdl-js-button mdl-button--primary"
                 @click="searchArtefactsByLink(item.Value)"
               >
-                {{ item.Value }}
+                {{ item.Value || '--' }}
+              <md-icon>zoom_in</md-icon>
               </button>
             </div>
           </div>
         </div>
+
         <ul class="errors" v-if="errors && errors.length">
           <li v-for="(error, index) of errors" :key="index">
             {{ error.message }}
@@ -230,6 +218,7 @@ export default {
     & .md-icon {
       position: relative;
       left: 10px;
+      opacity: 0.50;
     }
   }
 
@@ -252,28 +241,28 @@ export default {
     color: red;
   }
 
+  // .md-layout-item {
+  //   border: 1px solid rgba(0,0,0,.12);
+  // }
+
   .item--header {
     color: navy;
     text-align: left;
     font-weight: bold;
     font-size: 1.6rem;
-    /* border-top: 1px solid rgba(0,0,0,.12); */
-    padding-top: 20px;
   }
 
   .item--key {
-    text-align: right;
+    padding: $size-xs;
   }
 
   .item--value {
     text-align: left;
     font-weight: bold;
-    padding-left: 10px;
   }
 
   .item--value button {
-    margin-top: -8px;
-    margin-left: -16px;
+    margin-left: -8px;
   }
 
   form {
