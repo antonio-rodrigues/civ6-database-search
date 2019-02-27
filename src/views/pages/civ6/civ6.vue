@@ -19,11 +19,12 @@
     <Panel v-if="showInfo">
       <h4 slot="title">TIP</h4>
       <p>
-        Example search: America, Galley, Redcoat_disembark...<br />
-        <small
-          >Note: some keys hold `true` or `false` for `1` and `0` values
-          (boolean database field types).</small
-        >
+        Example search: America, Galley, Redcoat_disembark...
+        <br />
+        <small>
+          Note: some keys hold `true` or `false` for `1` and `0` values (boolean
+          database field types).
+        </small>
       </p>
     </Panel>
 
@@ -55,25 +56,49 @@
       </md-content>
 
       <div class="content" v-if="!loading">
-
         <div v-for="(artefact, index1) in filteredArtefacts" :key="index1">
-          <div class="md-layout md-gutter md-alignment-center-space-between coa-vspacing-m" v-for="(item, index2) in artefact.Rows" :key="index2">
-            <div v-if="index2 === 0" class="md-layout-item md-medium-size-100 coa-vspacing-m item--header">
+          <div
+            class="md-layout md-gutter md-alignment-center-space-between coa-vspacing-m"
+            v-for="(item, index2) in artefact.Rows"
+            :key="index2"
+          >
+            <div
+              v-if="index2 === 0"
+              class="md-layout-item md-medium-size-100 coa-vspacing-m item--header"
+            >
               {{ artefact.Header }}
             </div>
-            <div class="md-layout-item md-small-size-50 md-xsmall-size-100 item--key">
-              {{ item.Key || 'Unknow' }}:
+            <div
+              v-if="item.Key"
+              class="md-layout-item md-small-size-50 md-xsmall-size-100 item--key"
+            >
+              {{ item.Key }}:
             </div>
-            <div v-if="!item.isLink" class="md-layout-item md-small-size-50 md-xsmall-size-100 item--value">
-              {{ artefact.Value || '--' }}
+            <!-- text only -->
+            <div
+              v-if="!item.Key"
+              class="md-layout-item md-medium-size-100 item--value"
+            >
+              {{ item.Value || "null" }}
             </div>
-            <div v-if="item.isLink" class="md-layout-item md-small-size-50 md-xsmall-size-100 item--value">
+            <!-- key/pair text -->
+            <div
+              v-if="item.Key && !item.isLink"
+              class="md-layout-item md-small-size-50 md-xsmall-size-100 item--value"
+            >
+              {{ item.Value || "null" }}
+            </div>
+            <!-- key/pair link -->
+            <div
+              v-if="item.Key && item.isLink"
+              class="md-layout-item md-small-size-50 md-xsmall-size-100 item--value"
+            >
               <button
                 class="mdl-button mdl-js-button mdl-button--primary"
                 @click="searchArtefactsByLink(item.Value)"
               >
-                {{ item.Value || '--' }}
-              <md-icon>zoom_in</md-icon>
+                {{ item.Value || "null" }}
+                <md-icon>zoom_in</md-icon>
               </button>
             </div>
           </div>
@@ -218,7 +243,7 @@ export default {
     & .md-icon {
       position: relative;
       left: 10px;
-      opacity: 0.50;
+      opacity: 0.5;
     }
   }
 
@@ -247,9 +272,12 @@ export default {
 
   .item--header {
     color: navy;
+    margin-top: $size-m;
+    padding-top: $size-s;
     text-align: left;
     font-weight: bold;
     font-size: 1.6rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
   }
 
   .item--key {
@@ -270,7 +298,11 @@ export default {
   }
 
   .loader {
-    margin-top: 40px;
+    width: 100%;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    margin-top: $size-l;
   }
 
   h1,
@@ -312,7 +344,6 @@ export default {
       right: 25vw;
       opacity: 1;
     }
-
   }
 }
 </style>
