@@ -142,11 +142,16 @@ export default {
     margin: 0 0 0 $size-s;
   }
 
-  /// Make tabs scrollable/swipeable
   .coa-nav-bar {
     width: 100%;
     max-width: 100%;
-    overflow: scroll;
+  }
+
+  @media (max-width: 425px) {
+    /// Make tabs scrollable/swipeable
+    .coa-nav-bar {
+      overflow: scroll;
+    }
   }
 }
 </style>
