@@ -1,5 +1,5 @@
 <template>
-  <div class="select-style md-elevation-1 coa-padding-s">
+  <div class="select-style coa-padding-s">
     <div v-if="label" class="select-label">{{ label }}</div>
     <select v-model="selectedLanguage" @change="onChangeLanguage">
       <option
@@ -61,23 +61,19 @@ export default {
 <style scoped lang="scss">
 @import "@/styles/index.scss";
 
-$select-size: 250px;
-
 .select-style {
   width: 250px;
-  border-radius: 3px;
-  background-color: $color-primary-light;
   overflow: hidden;
   z-index: 999;
 }
 .select-label {
-  font-size: 1.2em;
+  font-size: 1em;
   color: $color-text;
 }
 .select-style select {
   width: 230px;
-  font-size: 1.2em;
-  border: 1px solid #ccc;
+  font-size: 1em;
+  background-color: $color-primary-light;
 }
 .select-style select:focus {
   outline: none;
