@@ -1,16 +1,17 @@
 <template>
   <div class="page-header">
     <div
-      class="md-layout md-gutter md-alignment-center-space-between container"
+      class="md-layout md-alignment-center-space-between coa-vspacing-m container"
     >
-      <div class="md-layout-item md-medium-size-50">
-        <h1 class="md-display-1">{{ header }}</h1>
+      <div class="md-layout-item md-size-100 coa-vspacing-s">
+        <h1 class="md-display-1 container--header">{{ header }}</h1>
       </div>
-      <div class="md-layout-item md-medium-size-50">
-        <slot name="options"></slot>
+      <div class="md-layout-item md-size-100 coa-vspacing-m">
+        <h3 v-if="subheader" class="md-headline container--subheader">
+          {{ subheader }}
+        </h3>
       </div>
     </div>
-    <h3 v-if="subheader" class="md-headline">{{ subheader }}</h3>
   </div>
 </template>
 
@@ -28,14 +29,24 @@ export default {
 @import "@/styles/index.scss";
 
 .page-header {
-  background-color: transparent;
+  background-color: $color-white;
+  padding: $size-s $size-m;
 
   & h3 {
     margin: 0;
     padding: 0 0 $size-m;
   }
+
   & .container {
-    // background-color: $color-secondary-ligth;
+    &--header,
+    &--subheader {
+      margin: 0;
+      padding: 0;
+    }
+
+    &--subheader {
+      color: $color-grey;
+    }
   }
 }
 </style>

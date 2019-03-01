@@ -214,7 +214,7 @@ export default {
 .page-civ-6 {
   margin: 0;
   padding: $size-s $size-m;
-  background-color: $color-white;
+  background-color: $color-grey-ligth;
 
   .search-container {
   }

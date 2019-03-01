@@ -153,6 +153,9 @@ export default {
 }
 
 .page-app {
+  background-color: $color-grey-ligth;
+  overflow: hidden;
+
   .md-avatar {
     border: 1px solid $color-white;
     margin: 0 0 0 $size-s;
