@@ -7,11 +7,12 @@
       </div>
       <Panel v-if="showInfo">
         <h4 slot="title">TIP</h4>
-        <p>Example search: America, Galley, Redcoat_disembark...
-          <br>
+        <p>
+          Example search: America, Galley, Redcoat_disembark...
+          <br />
           <small>
-            Note: some keys hold `true` or `false` for `1` and `0` values (boolean
-            database field types).
+            Note: some keys hold `true` or `false` for `1` and `0` values
+            (boolean database field types).
           </small>
         </p>
       </Panel>
@@ -29,11 +30,12 @@
                 class="md-raised md-primary"
                 :disabled="!isSearchable"
                 @click="searchArtefacts"
-              >Search</md-button>
+                >Search</md-button
+              >
             </md-content>
 
             <div class="loader" v-if="loading">
-              <img src="@/assets/spinner2.gif">
+              <img src="@/assets/spinner2.gif" />
             </div>
 
             <md-content class="coa-vspacing-l" v-if="!isEmpty">
@@ -45,7 +47,10 @@
             </md-content>
 
             <div class="content" v-if="!loading">
-              <div v-for="(artefact, index1) in filteredArtefacts" :key="index1">
+              <div
+                v-for="(artefact, index1) in filteredArtefacts"
+                :key="index1"
+              >
                 <div
                   class="md-layout md-gutter md-alignment-center-space-between coa-vspacing-m"
                   v-for="(item, index2) in artefact.Rows"
@@ -54,21 +59,29 @@
                   <div
                     v-if="index2 === 0"
                     class="md-layout-item md-medium-size-100 coa-vspacing-m item--header"
-                  >{{ artefact.Header }}</div>
+                  >
+                    {{ artefact.Header }}
+                  </div>
                   <div
                     v-if="item.Key"
                     class="md-layout-item md-small-size-50 md-xsmall-size-100 item--key"
-                  >{{ item.Key }}:</div>
+                  >
+                    {{ item.Key }}:
+                  </div>
                   <!-- text only -->
                   <div
                     v-if="!item.Key"
                     class="md-layout-item md-medium-size-100 item--value"
-                  >{{ item.Value || "null" }}</div>
+                  >
+                    {{ item.Value || "null" }}
+                  </div>
                   <!-- key/pair text -->
                   <div
                     v-if="item.Key && !item.isLink"
                     class="md-layout-item md-small-size-50 md-xsmall-size-100 item--value"
-                  >{{ item.Value || "null" }}</div>
+                  >
+                    {{ item.Value || "null" }}
+                  </div>
                   <!-- key/pair link -->
                   <div
                     v-if="item.Key && item.isLink"
@@ -86,12 +99,16 @@
               </div>
 
               <ul class="errors" v-if="errors && errors.length">
-                <li v-for="(error, index) of errors" :key="index">{{ error.message }}</li>
+                <li v-for="(error, index) of errors" :key="index">
+                  {{ error.message }}
+                </li>
               </ul>
             </div>
           </form>
         </div>
-        <div class="md-layout-item md-medium-size-20 queries-container">[ query list ]</div>
+        <div class="md-layout-item md-medium-size-20 queries-container">
+          [ query list ]
+        </div>
       </div>
     </div>
   </Page>
