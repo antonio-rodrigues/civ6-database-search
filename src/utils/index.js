@@ -1,4 +1,13 @@
-import { HTTP, ApiMethod } from "./core.utils";
-import { prepareArtefactsData } from "./search.utils";
+import { HTTP, ApiMethod } from "./core";
+import { prepareArtefactsData } from "./search";
+import { getItem, setItem, removeItem, clearStorage } from "./storage";
 
-export { HTTP, ApiMethod, prepareArtefactsData };
+export {
+  HTTP,
+  ApiMethod,
+  prepareArtefactsData,
+  getItem,
+  setItem,
+  removeItem,
+  clearStorage
+};

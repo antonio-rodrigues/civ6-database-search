@@ -8,7 +8,7 @@
 
 <script>
 import Page from "@/components/Page";
-const settings = { version: 1, name: "civ5", label: "CIV-5" };
+const settings = { version: 5, name: "civ5", label: "CIV-5" };
 
 export default {
   name: settings.name,

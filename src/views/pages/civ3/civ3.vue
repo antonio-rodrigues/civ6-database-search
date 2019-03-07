@@ -8,7 +8,7 @@
 
 <script>
 import Page from "@/components/Page";
-const page = { version: 1, name: "civ3", label: "CIV-3" };
+const page = { version: 3, name: "civ3", label: "CIV-3" };
 
 export default {
   name: page.name,

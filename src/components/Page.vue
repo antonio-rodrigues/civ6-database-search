@@ -46,7 +46,7 @@ $content-height: calc(#{$max-height} - 250px);
   margin: 0;
   padding: 0;
   min-height: $max-height;
-  background-color: $color-grey-ligth;
+  background-color: $color-white;
 
   &-layout {
     flex-direction: column;
@@ -61,7 +61,7 @@ $content-height: calc(#{$max-height} - 250px);
       min-height: $content-height;
       margin: 0;
       padding: $size-xs $size-m; // default content padding
-      background-color: $color-grey-ligth; // default content bg color
+      background-color: $color-white; // default content bg color
       overflow: auto;
     }
 

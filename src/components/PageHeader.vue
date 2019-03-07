@@ -29,7 +29,7 @@ export default {
 @import "@/styles/index.scss";
 
 .page-header {
-  background-color: $color-white;
+  background-color: $color-grey-ligth;
   padding: $size-s $size-m;
 
   & h3 {
