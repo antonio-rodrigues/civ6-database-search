@@ -1,25 +1,27 @@
 <template>
-  <div class="page-civ-5 coa-padding-s">
-    <h1 class="md-display-1">{{ pageTitle }}</h1>
-    <!-- [ add here specific Civ-version content ] -->
-  </div>
+  <Page :header="settings.label" subheader="sub-title description">
+    <div slot="content" class="civ-5">
+      <p>[ add here specific Civ#{{ settings.version }} content ]</p>
+    </div>
+  </Page>
 </template>
 
 <script>
-const page = { version: 5, name: "civ5", label: "CIV-5" };
+import Page from "@/components/Page";
+const settings = { version: 5, name: "civ5", label: "CIV-5" };
 
 export default {
-  name: page.name,
+  name: settings.name,
 
   data: () => {
     return {
-      pageTitle: `${page.label} Page Header`
+      settings
     };
   },
 
   // lifecycle: init
   beforeCreate() {
-    console.group("[LIFECYCLE]");
+    console.group(`${settings.label} [LIFECYCLE]`);
     console.log("beforeCreate(): nothing gets called before me");
   },
   created() {
@@ -50,10 +52,12 @@ export default {
   },
   destroyed() {
     console.log("destroyed(): *PAW* You're gone for good!");
-    console.groupEnd();
   },
 
   methods: {
+    getPageHeader() {
+      return this.pageTitle;
+    },
     onButtonClick: function(ev) {
       console.log("YAY! Button was clicked! Event:", { ev });
     },
@@ -61,16 +65,16 @@ export default {
     onLanguageChange: function(lang) {
       console.log("onLanguageChange:", { lang });
     }
+  },
+  components: {
+    Page
   }
 };
 </script>
 
 <style lang="scss" scoped>
-@import "@/styles/index.scss";
+// @import "@/styles/index.scss";
 
-.page-civ-5 {
-  margin: 0;
-  padding: $size-s $size-m;
-  background-color: $color-white;
+.civ-5 {
 }
 </style>

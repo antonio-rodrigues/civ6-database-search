@@ -1,131 +1,142 @@
 <template>
-  <div class="page-civ-6 coa-padding-s">
-    <LanguageSelector
-      class="language-selector"
-      label="History &amp; Descriptions locale"
-      :defaultLang="lang"
-      @onLanguageChange="onLanguageChange"
-    />
-
-    <PageHeader
-      title="CIV-6 DATABASE"
-      subHeader="Search for internal configuration keys"
-    />
-
-    <div class="search-tip" @click="onShowInfo">
-      <md-icon>info_outlined</md-icon>
-      <small>How to?</small>
-    </div>
-    <Panel v-if="showInfo">
-      <h4 slot="title">TIP</h4>
-      <p>
-        Example search: America, Galley, Redcoat_disembark...
-        <br />
-        <small>
-          Note: some keys hold `true` or `false` for `1` and `0` values (boolean
-          database field types).
-        </small>
-      </p>
-    </Panel>
-
-    <form action="#">
-      <md-content class="coa-vspacing-l">
-        <md-field>
-          <md-icon class="md-accent">search</md-icon>
-          <label>Enter configuration keyword (case sensitive)</label>
-          <md-input v-model="keyword"></md-input>
-        </md-field>
-        <md-button
-          class="md-raised md-primary"
-          :disabled="!isSearchable"
-          @click="searchArtefacts"
-          >Search</md-button
-        >
-      </md-content>
-
-      <div class="loader" v-if="loading">
-        <img src="@/assets/spinner2.gif" />
+  <Page :header="page.label" :subheader="page.sublabel">
+    <div slot="content" class="civ-6">
+      <!--/page content/-->
+      <div class="search-tip" @click="onShowInfo">
+        <md-icon>info_outlined</md-icon>
+        <small>How to?</small>
       </div>
+      <Panel v-if="showInfo">
+        <h4 slot="title">TIP</h4>
+        <p>
+          Example search: America, Galley, Redcoat_disembark...
+          <br />
+          <small>
+            Note: some keys hold `true` or `false` for `1` and `0` values
+            (boolean database field types).
+          </small>
+        </p>
+      </Panel>
 
-      <md-content class="coa-vspacing-l" v-if="!isEmpty">
-        <md-field>
-          <md-icon class="md-accent">filter</md-icon>
-          <label>Type to filter results...</label>
-          <md-input v-model="filterQuery"></md-input>
-        </md-field>
-      </md-content>
-
-      <div class="content" v-if="!loading">
-        <div v-for="(artefact, index1) in filteredArtefacts" :key="index1">
-          <div
-            class="md-layout md-gutter md-alignment-center-space-between coa-vspacing-m"
-            v-for="(item, index2) in artefact.Rows"
-            :key="index2"
-          >
-            <div
-              v-if="index2 === 0"
-              class="md-layout-item md-medium-size-100 coa-vspacing-m item--header"
-            >
-              {{ artefact.Header }}
-            </div>
-            <div
-              v-if="item.Key"
-              class="md-layout-item md-small-size-50 md-xsmall-size-100 item--key"
-            >
-              {{ item.Key }}:
-            </div>
-            <!-- text only -->
-            <div
-              v-if="!item.Key"
-              class="md-layout-item md-medium-size-100 item--value"
-            >
-              {{ item.Value || "null" }}
-            </div>
-            <!-- key/pair text -->
-            <div
-              v-if="item.Key && !item.isLink"
-              class="md-layout-item md-small-size-50 md-xsmall-size-100 item--value"
-            >
-              {{ item.Value || "null" }}
-            </div>
-            <!-- key/pair link -->
-            <div
-              v-if="item.Key && item.isLink"
-              class="md-layout-item md-small-size-50 md-xsmall-size-100 item--value"
-            >
-              <button
-                class="mdl-button mdl-js-button mdl-button--primary"
-                @click="searchArtefactsByLink(item.Value)"
+      <div class="md-layout md-gutter md-alignment-top-space-between">
+        <div class="md-layout-item md-size-70 search-container">
+          <!--/search-form/-->
+          <form action="#">
+            <div class="md-layout md-gutter md-alignment-top-space-between">
+              <div class="md-layout-item md-size-small-100 md-size-medium-50">
+                <md-content class="coa-vspacing-l">
+                  <md-field>
+                    <md-icon class="md-accent">search</md-icon>
+                    <label>Keyword (case sensitive)</label>
+                    <md-input v-model="keyword"></md-input>
+                  </md-field>
+                  <md-button
+                    class="md-raised md-primary"
+                    :disabled="!isSearchable"
+                    @click="searchArtefacts"
+                    >Search</md-button
+                  >
+                </md-content>
+              </div>
+              <div
+                class="md-layout-item md-size-small-100 md-size-medium-50"
+                v-if="!isEmpty"
               >
-                {{ item.Value || "null" }}
-                <md-icon>zoom_in</md-icon>
-              </button>
+                <md-content class="coa-vspacing-l">
+                  <md-field>
+                    <md-icon class="md-accent">filter</md-icon>
+                    <label>Type to filter results...</label>
+                    <md-input v-model="filterQuery"></md-input>
+                  </md-field>
+                </md-content>
+              </div>
             </div>
+          </form>
+
+          <!--/spinner/-->
+          <div class="loader" v-if="loading">
+            <img src="@/assets/spinner2.gif" />
+          </div>
+
+          <!--/results-list/-->
+          <div class="content" v-if="!loading">
+            <div v-for="(artefact, index1) in filteredArtefacts" :key="index1">
+              <div
+                class="md-layout md-gutter md-alignment-center-space-between coa-vspacing-m"
+                v-for="(item, index2) in artefact.Rows"
+                :key="index2"
+              >
+                <div
+                  v-if="index2 === 0"
+                  class="md-layout-item md-medium-size-100 coa-vspacing-m item--header"
+                >
+                  {{ artefact.Header }}
+                </div>
+                <div
+                  v-if="item.Key"
+                  class="md-layout-item md-small-size-50 md-xsmall-size-100 item--key"
+                >
+                  {{ item.Key }}:
+                </div>
+                <!-- text only -->
+                <div
+                  v-if="!item.Key"
+                  class="md-layout-item md-medium-size-100 item--value"
+                >
+                  {{ item.Value || "null" }}
+                </div>
+                <!-- key/pair text -->
+                <div
+                  v-if="item.Key && !item.isLink"
+                  class="md-layout-item md-small-size-50 md-xsmall-size-100 item--value"
+                >
+                  {{ item.Value || "null" }}
+                </div>
+                <!-- key/pair link -->
+                <div
+                  v-if="item.Key && item.isLink"
+                  class="md-layout-item md-small-size-50 md-xsmall-size-100 item--value"
+                >
+                  <button
+                    class="mdl-button mdl-js-button mdl-button--primary"
+                    @click="searchArtefactsByLink(item.Value)"
+                  >
+                    {{ item.Value || "null" }}
+                    <md-icon>zoom_in</md-icon>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <ul class="errors" v-if="errors && errors.length">
+              <li v-for="(error, index) of errors" :key="index">
+                {{ error.message }}
+              </li>
+            </ul>
           </div>
         </div>
-
-        <ul class="errors" v-if="errors && errors.length">
-          <li v-for="(error, index) of errors" :key="index">
-            {{ error.message }}
-          </li>
-        </ul>
+        <div class="md-layout-item md-size-30 queries-container">
+          <!--/queries-list/-->
+          <QueryList></QueryList>
+        </div>
       </div>
-    </form>
-  </div>
+    </div>
+  </Page>
 </template>
 
 <script lang="js">
 import { HTTP, ApiMethod, prepareArtefactsData } from "@/utils";
+// import { mapActions } from "vuex";
 
 import PageHeader from "@/components/PageHeader";
+import Page from "@/components/Page";
 import Panel from "@/components/Panel";
-import LanguageSelector from "@/components/LanguageSelector";
+import QueryList from "@/components/QueryList";
 
-const DEFAULT_LANG = "en_US";
-const page = { version: 6, name: "civ6", label: "CIV-6" };
+const params = { version: 6, name: "civ6", label: "CIV-6 DATABASE", sublabel: "Search for internal configuration keys" };
 
 export default {
-  name: page.name,
+  name: params.name,
 
   computed: {
     isSearchable() {
@@ -155,7 +166,7 @@ export default {
 
   data() {
     return {
-      lang: DEFAULT_LANG,
+      page: params,
       loading: true,
       keyword: "",
       filterQuery: "",
@@ -175,14 +186,6 @@ export default {
     onShowInfo: function() {
       this.showInfo = !this.showInfo;
     },
-    onLanguageChange: function(lang) {
-      this.lang = lang;
-      if (this.keyword && this.keyword.length) {
-        // auto-repeat-search with selected lang
-        this.filterQuery = ""; // TODO: reset filtered results?
-        this.searchArtefacts();
-      }
-    },
     searchArtefacts: function() {
       const self = this;
       self.loading = true;
@@ -196,6 +199,7 @@ export default {
       HTTP.get(searchQuery)
         .then(response => prepareArtefactsData(response.data))
         .then(results => {
+          this.$store.dispatch('addQuery', self.keyword);
           this.artefacts = results;
           // console.log('> searchArtefacts:', { keyword: self.keyword, results: results })
           self.loading = false;
@@ -213,9 +217,10 @@ export default {
     }
   },
   components: {
+    Page,
     PageHeader,
     Panel,
-    LanguageSelector
+    QueryList
   }
 };
 </script>
@@ -223,15 +228,14 @@ export default {
 <style lang="scss" scoped>
 @import "@/styles/index.scss";
 
-.page-civ-6 {
-  margin: 0;
-  padding: $size-s $size-m;
-  background-color: $color-white;
+.civ-6 {
+  .search-container {
+    max-width: 800px;
+  }
 
-  .language-selector {
-    position: absolute;
-    top: 150px;
-    right: $size-l;
+  .queries-container {
+    // max-width: 400px;
+    overflow: auto;
   }
 
   .search-tip {
@@ -250,12 +254,6 @@ export default {
   .vue-back-to-top {
     background-color: forestgreen;
     opacity: 0.5;
-  }
-
-  .search-container {
-    max-width: 800px;
-    background-color: rgba(0, 0, 0, 0.03);
-    border-radius: 3px;
   }
 
   .content {
@@ -294,7 +292,7 @@ export default {
   }
 
   form {
-    margin: 60px 0 100px 0;
+    margin-top: $size-m;
   }
 
   .loader {

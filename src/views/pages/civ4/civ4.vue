@@ -1,11 +1,13 @@
 <template>
-  <div class="page-civ-4 coa-padding-s">
-    <h1 class="md-display-1">{{ pageTitle }}</h1>
-    <!-- [ add here specific Civ-version content ] -->
-  </div>
+  <Page :header="data.label" subheader="sub-title description">
+    <div slot="content" class="civ-4">
+      <p>[ add here specific Civ#{{ data.version }} content ]</p>
+    </div>
+  </Page>
 </template>
 
 <script>
+import Page from "@/components/Page";
 const page = { version: 4, name: "civ4", label: "CIV-4" };
 
 export default {
@@ -13,7 +15,7 @@ export default {
 
   data: () => {
     return {
-      pageTitle: `${page.label} Page Header`
+      data: page
     };
   },
 
@@ -53,6 +55,9 @@ export default {
   },
 
   methods: {
+    getPageHeader() {
+      return this.pageTitle;
+    },
     onButtonClick: function(ev) {
       console.log("YAY! Button was clicked! Event:", { ev });
     },
@@ -60,16 +65,16 @@ export default {
     onLanguageChange: function(lang) {
       console.log("onLanguageChange:", { lang });
     }
+  },
+  components: {
+    Page
   }
 };
 </script>
 
 <style lang="scss" scoped>
-@import "@/styles/index.scss";
+// @import "@/styles/index.scss";
 
-.page-civ-4 {
-  margin: 0;
-  padding: $size-s $size-m;
-  background-color: $color-white;
+.civ-4 {
 }
 </style>

@@ -14,9 +14,14 @@
           </div>
 
           <div class="md-toolbar-section-end">
-            <md-button class="md-icon-button">
+            <LanguageSelector
+              class="language-selector"
+              :defaultLang="lang"
+              @onLanguageChange="onLanguageChange"
+            />
+            <!-- <md-button class="md-icon-button">
               <md-icon>more_vert</md-icon>
-            </md-button>
+            </md-button> -->
           </div>
         </div>
 
@@ -103,12 +108,23 @@
 </template>
 
 <script>
+import LanguageSelector from "@/components/LanguageSelector";
+const DEFAULT_LANG = "en_US";
+
 export default {
   name: "App",
   data: () => ({
+    lang: DEFAULT_LANG,
     menuVisible: false
   }),
-  methods: {}
+  methods: {
+    onLanguageChange: function(lang) {
+      this.lang = lang;
+    }
+  },
+  components: {
+    LanguageSelector
+  }
 };
 </script>
 
@@ -137,6 +153,9 @@ export default {
 }
 
 .page-app {
+  background-color: $color-grey-ligth;
+  overflow: hidden;
+
   .md-avatar {
     border: 1px solid $color-white;
     margin: 0 0 0 $size-s;
