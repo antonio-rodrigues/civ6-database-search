@@ -20,10 +20,13 @@
                     class="md-raised md-primary"
                     :disabled="!isSearchable"
                     @click="searchArtefacts"
-                  >Search</md-button>
+                    >Search</md-button
+                  >
                   <div class="search-tip">
                     <md-icon>info_outlined</md-icon>
-                    <md-tooltip md-direction="right">Example: America, Galley, Redcoat_disembark</md-tooltip>
+                    <md-tooltip md-direction="right"
+                      >Example: America, Galley, Redcoat_disembark</md-tooltip
+                    >
                   </div>
                   <md-button
                     class="md-icon-button md-primary search-goto-queries"
@@ -33,7 +36,10 @@
                   </md-button>
                 </md-content>
               </div>
-              <div class="md-layout-item md-size-small-100 md-size-medium-50" v-if="!isEmpty">
+              <div
+                class="md-layout-item md-size-small-100 md-size-medium-50"
+                v-if="!isEmpty"
+              >
                 <md-content class="coa-vspacing-l">
                   <md-field>
                     <md-icon class="md-accent">filter</md-icon>
@@ -47,7 +53,7 @@
 
           <!--/spinner/-->
           <div class="loader" v-if="loading">
-            <img src="@/assets/spinner2.gif" alt="Spinner">
+            <img src="@/assets/spinner2.gif" alt="Spinner" />
           </div>
 
           <!--/results-list/-->
@@ -62,21 +68,29 @@
                 <div
                   v-if="index2 === 0"
                   class="md-layout-item md-medium-size-100 md-large-size-100 md-xlarge-size-100 coa-vspacing-m item--header"
-                >{{ artefact.Header }}</div>
+                >
+                  {{ artefact.Header }}
+                </div>
                 <div
                   v-if="item.Key"
                   class="md-layout-item md-small-size-50 md-xsmall-size-100 item--key"
-                >{{ item.Key }}:</div>
+                >
+                  {{ item.Key }}:
+                </div>
                 <!-- text only -->
                 <div
                   v-if="!item.Key"
                   class="md-layout-item md-medium-size-100 item--value"
-                >{{ item.Value || "null" }}</div>
+                >
+                  {{ item.Value || "null" }}
+                </div>
                 <!-- key/pair text -->
                 <div
                   v-if="item.Key && !item.isLink"
                   class="md-layout-item md-small-size-50 md-xsmall-size-100 item--value"
-                >{{ item.Value || "null" }}</div>
+                >
+                  {{ item.Value || "null" }}
+                </div>
                 <!-- key/pair link -->
                 <div
                   v-if="item.Key && item.isLink"
@@ -94,7 +108,9 @@
             </div>
 
             <ul class="errors" v-if="errors && errors.length">
-              <li v-for="(error, index) of errors" :key="index">{{ error.message }}</li>
+              <li v-for="(error, index) of errors" :key="index">
+                {{ error.message }}
+              </li>
             </ul>
           </div>
         </div>
@@ -218,8 +234,7 @@ export default {
       this.filterQuery = ""; // reset filtered results
       this.keyword = subkey;
       this.searchArtefacts();
-    },
-    handleComplete: function(ev) {}
+    }
   },
   components: {
     Page,

@@ -1,6 +1,9 @@
 <template>
   <div class="page-app">
-    <vue-scroll-progress-bar height="2px" backgroundColor="linear-gradient(to right, #9abb50, #3646a7)" />
+    <vue-scroll-progress-bar
+      height="2px"
+      backgroundColor="linear-gradient(to right, #9abb50, #3646a7)"
+    />
     <back-to-top bottom="50px" right="50px" visibleoffset="200">
       <md-button class="md-icon-button md-raised md-accent btn-to-top">
         <md-icon>expand_less</md-icon>
@@ -12,7 +15,7 @@
         <div class="md-toolbar-row">
           <div class="md-toolbar-section-start">
             <md-avatar class="md-small">
-              <img src="@/assets/coa-flag.jpg" alt="avatar">
+              <img src="@/assets/coa-flag.jpg" alt="avatar" />
             </md-avatar>
             <span class="md-title">C-O-A</span>
           </div>
@@ -30,12 +33,36 @@
           <div class="coa-nav-bar">
             <md-tabs class="md-primary" md-sync-route>
               <md-tab id="tab-home" md-label="Home" to="/"></md-tab>
-              <md-tab id="tab-pages-civ-6" md-label="Civ-6" to="/civ/6"></md-tab>
-              <md-tab id="tab-pages-civ-5" md-label="Civ-5" to="/civ/5"></md-tab>
-              <md-tab id="tab-pages-civ-4" md-label="Civ-4" to="/civ/4"></md-tab>
-              <md-tab id="tab-pages-civ-3" md-label="Civ-3" to="/civ/3"></md-tab>
-              <md-tab id="tab-pages-civ-2" md-label="Civ-2" to="/civ/2"></md-tab>
-              <md-tab id="tab-pages-civ-1" md-label="Civ-1" to="/civ/1"></md-tab>
+              <md-tab
+                id="tab-pages-civ-6"
+                md-label="Civ-6"
+                to="/civ/6"
+              ></md-tab>
+              <md-tab
+                id="tab-pages-civ-5"
+                md-label="Civ-5"
+                to="/civ/5"
+              ></md-tab>
+              <md-tab
+                id="tab-pages-civ-4"
+                md-label="Civ-4"
+                to="/civ/4"
+              ></md-tab>
+              <md-tab
+                id="tab-pages-civ-3"
+                md-label="Civ-3"
+                to="/civ/3"
+              ></md-tab>
+              <md-tab
+                id="tab-pages-civ-2"
+                md-label="Civ-2"
+                to="/civ/2"
+              ></md-tab>
+              <md-tab
+                id="tab-pages-civ-1"
+                md-label="Civ-1"
+                to="/civ/1"
+              ></md-tab>
               <md-tab id="tab-favorites" md-label="About" to="/about"></md-tab>
             </md-tabs>
           </div>
@@ -77,7 +104,7 @@
       </md-app-drawer>
       <md-app-content>
         <keep-alive>
-          <router-view/>
+          <router-view />
         </keep-alive>
       </md-app-content>
     </md-app>
@@ -118,7 +145,7 @@ export default {
 }
 
 .btn-to-top {
-  opacity: 0.40;
+  opacity: 0.4;
 }
 
 /// MD overrides

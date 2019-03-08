@@ -1,13 +1,19 @@
 <template>
   <div class="page">
     <div class="md-layout md-alignment-top-space-between page-layout">
-      <div id="page-top" class="md-layout-item md-size-100 coa-vspacing-s page-layout--header">
+      <div
+        id="page-top"
+        class="md-layout-item md-size-100 coa-vspacing-s page-layout--header"
+      >
         <PageHeader :header="header" :subheader="subheader"></PageHeader>
       </div>
       <div class="md-layout-item md-size-100 page-layout--content">
         <slot name="content"></slot>
       </div>
-      <div id="page-bottom" class="md-layout-item md-size-100 page-layout--footer">
+      <div
+        id="page-bottom"
+        class="md-layout-item md-size-100 page-layout--footer"
+      >
         <PageFooter>[ footer here ]</PageFooter>
       </div>
     </div>
