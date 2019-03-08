@@ -9,9 +9,12 @@
             :key="index"
             @click="onQueryClick($event, query)"
           >
-            <span class="md-list-item-text">{{ query }}</span>
+            <div class="md-list-item-text">
+              <span>{{ query.keyword }}</span>
+              <span>{{ query.filter || "--" }}</span>
+            </div>
             <md-button
-              class="md-icon-button md-accent"
+              class="md-icon-button md-accent md-list-action"
               @click="onRemoveClick($event, index)"
             >
               <md-icon>clear</md-icon>
@@ -40,9 +43,9 @@ export default {
   methods: {
     ...mapActions(["removeQuery"]),
     // re-execute search with this keyword
-    onQueryClick(ev, keyword) {
+    onQueryClick(ev, row) {
       // emit to event bus
-      this.$root.$emit("onReApplyQuery", keyword);
+      this.$root.$emit("onReApplyQuery", row);
     },
     // remove query from the list
     onRemoveClick(ev, index) {
@@ -60,5 +63,10 @@ export default {
 .query-list {
   min-height: calc(#{$content-height} - 50px);
   background-color: $color-white;
+
+  & .md-list-item-text span:last-child {
+    font-size: 0.7em;
+    color: $color-grey;
+  }
 }
 </style>

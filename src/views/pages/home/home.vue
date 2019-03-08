@@ -53,17 +53,6 @@ export default {
   mounted() {
     console.log("mounted(): component did mount");
     this.myLabel = "MyLabel is now updated!!!";
-
-    const height =
-      document.documentElement.scrollHeight -
-      document.documentElement.clientHeight;
-    console.log(
-      ">> height",
-      height,
-      document.documentElement.scrollHeight,
-      document.documentElement.clientHeight
-    );
-
     console.groupEnd();
   },
 

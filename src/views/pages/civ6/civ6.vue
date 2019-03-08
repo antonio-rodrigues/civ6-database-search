@@ -44,7 +44,10 @@
                   <md-field>
                     <md-icon class="md-accent">filter</md-icon>
                     <label>Type to filter results...</label>
-                    <md-input v-model="filterQuery"></md-input>
+                    <md-input
+                      v-model="filterQuery"
+                      @blur="onBlurFilter"
+                    ></md-input>
                   </md-field>
                 </md-content>
               </div>
@@ -171,6 +174,7 @@ export default {
       loading: true,
       keyword: "",
       filterQuery: "",
+      reFilterQuery: "",
       filterQueryCount: 0,
       artefacts: [],
       errors: [],
@@ -183,25 +187,26 @@ export default {
   },
   mounted() {
     // subscribe to event bus $emit
-    this.$root.$on("onReApplyQuery", keyword => {
-      this.keyword = keyword;
-      this.searchArtefacts();
+    this.$root.$on("onReApplyQuery", data => {
+      this.keyword = data.keyword; // assign search keyword
+      this.reFilterQuery = data.filter; // set to re-apply filter when results
+      this.searchArtefacts(); // fetch results
     });
   },
   methods: {
     ...mapActions([
       'addQuery' // store.actions.addQuery()
     ]),
-    gotoTop: function () {
-      // ScrollIntoView(document.getElementById('page-top'));
-      VueScrollTo.scrollTo('#page-top', 300, { offset: -300 });
-    },
     gotoQueries: function () {
-      // ScrollIntoView(document.getElementById('query-list'));
       VueScrollTo.scrollTo('#query-list', 100, { offset: 50 });
     },
     onShowInfo: function() {
       this.showInfo = !this.showInfo;
+    },
+    onBlurFilter: function() {
+      if (this.filteredArtefacts.length && this.filterQuery) {
+        this.addQuery({ keyword: this.keyword, filter: this.filterQuery }); // addQuery === mapped action
+      }
     },
     searchArtefacts: function() {
       const self = this;
@@ -218,10 +223,15 @@ export default {
         .then(results => {
           // persist on redux
           if (results.length) {
-            self.addQuery(self.keyword); // addQuery === mapped action
+            self.addQuery({ keyword: self.keyword, filter: self.filterQuery }); // addQuery === mapped action
           }
           // load data to list
           self.artefacts = results;
+          // re-apply filter to results
+          if (self.reFilterQuery) {
+            self.filterQuery = self.reFilterQuery;
+            self.reFilterQuery = ""; // reset
+          }
           self.loading = false;
         })
         .catch(e => {

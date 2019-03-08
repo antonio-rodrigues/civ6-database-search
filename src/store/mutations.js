@@ -3,7 +3,11 @@
 import { setItem, clearStorage } from "@/utils";
 
 export const ADD_QUERY = (state, payload) => {
-  if (payload && state.queries.indexOf(payload) === -1) {
+  // check if already on array
+  const exists = state.queries.filter(
+    item => JSON.stringify(item) === JSON.stringify(payload)
+  );
+  if (payload && exists.length === 0) {
     // add item to state, if not in list
     state.queries.push(payload);
     // re-sort array
