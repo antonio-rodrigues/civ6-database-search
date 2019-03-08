@@ -192,6 +192,7 @@ export default {
   mounted() {
     // subscribe to event bus $emit
     this.$root.$on("onReApplyQuery", data => {
+      this.filterQuery = ""; // reset filter
       this.keyword = data.keyword; // assign search keyword
       this.reFilterQuery = data.filter; // set to re-apply filter when results
       this.searchArtefacts(); // fetch results
