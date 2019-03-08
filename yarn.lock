@@ -1476,6 +1476,11 @@ bcrypt-pbkdf@^1.0.0:
   dependencies:
     tweetnacl "^0.14.3"
 
+bezier-easing@^2.0.3:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/bezier-easing/-/bezier-easing-2.1.0.tgz#c04dfe8b926d6ecaca1813d69ff179b7c2025d86"
+  integrity sha1-wE3+i5JtbsrKGBPWn/F5t8ICXYY=
+
 bfj@^6.1.1:
   version "6.1.1"
   resolved "https://registry.yarnpkg.com/bfj/-/bfj-6.1.1.tgz#05a3b7784fbd72cfa3c22e56002ef99336516c48"
@@ -7842,6 +7847,13 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
+vue-backtotop@^1.6.1:
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/vue-backtotop/-/vue-backtotop-1.6.1.tgz#305c352c478aff6f39ee5d1c1c8ba5c05dc93d9a"
+  integrity sha512-/zbKVHrfs2gfuY/2r7n4jUGE0WrixXRNjYVOOmtPCpgnz2/1iNerczlWnbT2wnI/KJvfKMDp+sGza4CqDvElAQ==
+  dependencies:
+    vue "2.3.3"
+
 vue-eslint-parser@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/vue-eslint-parser/-/vue-eslint-parser-2.0.3.tgz#c268c96c6d94cfe3d938a5f7593959b0ca3360d1"
@@ -7880,6 +7892,20 @@ vue-router@3.0.1:
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.0.1.tgz#d9b05ad9c7420ba0f626d6500d693e60092cc1e9"
   integrity sha512-vLLoY452L+JBpALMP5UHum9+7nzR9PeIBCghU9ZtJ1eWm6ieUI8Zb/DI3MYxH32bxkjzYV1LRjNv4qr8d+uX/w==
 
+vue-scroll-progressbar@^0.1.4:
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/vue-scroll-progressbar/-/vue-scroll-progressbar-0.1.4.tgz#a44f1d46d11e8bd575b63b3e114684e744d77d72"
+  integrity sha512-ZB23yzww4mQTFmUtzhlikl1DruGH7qffnxsmnLF2hVxvNsmtla/Yj1jcTUDQ4po2rL0FqYDt3ff0Y5OgXlqjDA==
+  dependencies:
+    vue "^2.5.21"
+
+vue-scrollto@^2.14.0:
+  version "2.14.0"
+  resolved "https://registry.yarnpkg.com/vue-scrollto/-/vue-scrollto-2.14.0.tgz#e8c5fcf82ce420faa82396a625dbab460d11b246"
+  integrity sha512-X2j0CXJM8zP85LPGWjJt41CvetqmiXj/6kPvlELpUYoTt1WNCZgHnu97kaUdpUn8YYGevZ1jnTKT3d3Q4GkgBQ==
+  dependencies:
+    bezier-easing "^2.0.3"
+
 vue-style-loader@^4.1.0:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/vue-style-loader/-/vue-style-loader-4.1.2.tgz#dedf349806f25ceb4e64f3ad7c0a44fba735fcf8"
@@ -7900,6 +7926,16 @@ vue-template-es2015-compiler@^1.8.2:
   version "1.8.2"
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.8.2.tgz#dd73e80ba58bb65dd7a8aa2aeef6089cf6116f2a"
   integrity sha512-cliV19VHLJqFUYbz/XeWXe5CO6guzwd0yrrqqp0bmjlMP3ZZULY7fu8RTC4+3lmHwo6ESVDHFDsvjB15hcR5IA==
+
+vue@2.3.3:
+  version "2.3.3"
+  resolved "https://registry.yarnpkg.com/vue/-/vue-2.3.3.tgz#d1eaa8fde5240735a4563e74f2c7fead9cbb064c"
+  integrity sha1-0eqo/eUkBzWkVj508sf+rZy7Bkw=
+
+vue@^2.5.21:
+  version "2.6.8"
+  resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.8.tgz#f21cbc536bfc14f7d1d792a137bb12f69e60ea91"
+  integrity sha512-+vp9lEC2Kt3yom673pzg1J7T1NVGuGzO9j8Wxno+rQN2WYVBX2pyo/RGQ3fXCLh2Pk76Skw/laAPCuBuEQ4diw==
 
 vue@^2.6.6:
   version "2.6.6"

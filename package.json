@@ -15,8 +15,11 @@
     "axios": "^0.18.0",
     "scroll-into-view": "^1.9.3",
     "vue": "^2.6.6",
+    "vue-backtotop": "^1.6.1",
     "vue-material": "^1.0.0-beta-10.2",
     "vue-router": "3.0.1",
+    "vue-scroll-progressbar": "^0.1.4",
+    "vue-scrollto": "^2.14.0",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
