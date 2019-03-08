@@ -6,14 +6,15 @@
         v-for="language in languages"
         :key="language.value"
         :value="language.value"
+        >{{ language.name }}</option
       >
-        {{ language.name }}
-      </option>
     </select>
   </div>
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
   name: "LanguageSelector",
   props: {
@@ -52,9 +53,11 @@ export default {
     }
   },
   methods: {
+    ...mapActions(["setLocale"]),
     onChangeLanguage(e) {
       // event bus; consume anywhere with this.$on() or <Component @onLanguageChange="doFoo" />
       this.$emit("onLanguageChange", e.target.value);
+      this.setLocale(e.target.value);
     }
   }
 };

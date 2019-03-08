@@ -31,6 +31,10 @@ export const REMOVE_QUERY = (state, key) => {
 };
 
 // App global
+export const SET_LOCALE = (state, payload) => {
+  state.lang = payload;
+};
+
 export const APP_RESET = state => {
   clearStorage();
   state.queries = []; // reset

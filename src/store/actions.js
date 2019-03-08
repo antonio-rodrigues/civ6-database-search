@@ -10,6 +10,10 @@ export const removeQuery = (context, payload) => {
 };
 
 // globals
+export const setLocale = (context, payload) => {
+  context.commit("SET_LOCALE", payload);
+};
+
 export const appReset = (context, payload) => {
   context.commit("APP_RESET", payload);
 };

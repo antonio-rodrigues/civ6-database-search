@@ -130,6 +130,7 @@
 
 <script lang="js">
 import { HTTP, ApiMethod, prepareArtefactsData } from "@/utils";
+import { mapGetters } from "vuex";
 import { mapActions } from "vuex";
 
 import PageHeader from "@/components/PageHeader";
@@ -144,6 +145,9 @@ import VueScrollTo from "vue-scrollto";
 export default {
   name: params.name,
   computed: {
+    ...mapGetters([
+      "lang" // this.store.state.lang
+    ]),
     isSearchable() {
       return this.keyword.length > 2;
     },
