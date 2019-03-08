@@ -1,17 +1,25 @@
 // mutation setters - possible mutations to state
 
-import { _getItem, setItem, _removeItem, clearStorage } from "@/utils";
+import { setItem, clearStorage } from "@/utils";
 
 export const ADD_QUERY = (state, payload) => {
-  // add item to state
-  state.queries.push(payload);
-  // persist new array on storage
-  setItem("coa-queries", state.queries);
+  if (payload && state.queries.indexOf(payload) === -1) {
+    // add item to state, if not in list
+    state.queries.push(payload);
+    // re-sort array
+    state.queries.sort();
+    // persist new array on storage
+    setItem("coa-queries", state.queries);
+  }
 };
 
-export const REMOVE_QUERY = (state, id) => {
-  // remove item from array
-  const newQueries = state.queries.filter(item => item !== id);
+export const REMOVE_QUERY = (state, key) => {
+  // remove by matching value...
+  // const newQueries = state.queries.filter(item => item !== id);
+  // remove item from array by key
+  const newQueries = state.queries
+    .slice(0, key)
+    .concat(state.queries.slice(key + 1, state.queries.length));
   // update state
   state.queries = newQueries;
   // persist new array on storage

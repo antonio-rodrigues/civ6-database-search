@@ -1,25 +1,11 @@
 <template>
-  <Page :header="page.label" :subheader="page.sublabel">
+  <Page id="page-top" :header="page.label" :subheader="page.sublabel">
     <div slot="content" class="civ-6">
       <!--/page content/-->
-      <div class="search-tip" @click="onShowInfo">
-        <md-icon>info_outlined</md-icon>
-        <small>How to?</small>
-      </div>
-      <Panel v-if="showInfo">
-        <h4 slot="title">TIP</h4>
-        <p>
-          Example search: America, Galley, Redcoat_disembark...
-          <br />
-          <small>
-            Note: some keys hold `true` or `false` for `1` and `0` values
-            (boolean database field types).
-          </small>
-        </p>
-      </Panel>
-
       <div class="md-layout md-gutter md-alignment-top-space-between">
-        <div class="md-layout-item md-size-70 search-container">
+        <div
+          class="md-layout-item md-small-size-100 md-medium-size-70 md-large-size-70 md-xlarge-size-70 coa-vspacing-m search-container"
+        >
           <!--/search-form/-->
           <form action="#">
             <div class="md-layout md-gutter md-alignment-top-space-between">
@@ -36,6 +22,18 @@
                     @click="searchArtefacts"
                     >Search</md-button
                   >
+                  <div class="search-tip">
+                    <md-icon>info_outlined</md-icon>
+                    <md-tooltip md-direction="right"
+                      >Example: America, Galley, Redcoat_disembark</md-tooltip
+                    >
+                  </div>
+                  <md-button
+                    class="md-icon-button md-primary search-goto-queries"
+                    @click="gotoQueries"
+                  >
+                    <md-icon>list</md-icon>
+                  </md-button>
                 </md-content>
               </div>
               <div
@@ -55,12 +53,13 @@
 
           <!--/spinner/-->
           <div class="loader" v-if="loading">
-            <img src="@/assets/spinner2.gif" />
+            <img src="@/assets/spinner2.gif" alt="Spinner" />
           </div>
 
           <!--/results-list/-->
           <div class="content" v-if="!loading">
             <div v-for="(artefact, index1) in filteredArtefacts" :key="index1">
+              <!-- artefact: {{ artefact }} -->
               <div
                 class="md-layout md-gutter md-alignment-center-space-between coa-vspacing-m"
                 v-for="(item, index2) in artefact.Rows"
@@ -68,7 +67,7 @@
               >
                 <div
                   v-if="index2 === 0"
-                  class="md-layout-item md-medium-size-100 coa-vspacing-m item--header"
+                  class="md-layout-item md-medium-size-100 md-large-size-100 md-xlarge-size-100 coa-vspacing-m item--header"
                 >
                   {{ artefact.Header }}
                 </div>
@@ -115,9 +114,17 @@
             </ul>
           </div>
         </div>
-        <div class="md-layout-item md-size-30 queries-container">
+        <div
+          class="md-layout-item md-small-size-100 md-medium-size-30 md-large-size-30 md-xlarge-size-30 queries-container"
+        >
           <!--/queries-list/-->
-          <QueryList></QueryList>
+          <md-button
+            class="md-icon-button md-primary search-goto-top"
+            @click="gotoTop"
+          >
+            <md-icon>expand_less</md-icon>
+          </md-button>
+          <QueryList id="query-list"></QueryList>
         </div>
       </div>
     </div>
@@ -126,7 +133,7 @@
 
 <script lang="js">
 import { HTTP, ApiMethod, prepareArtefactsData } from "@/utils";
-// import { mapActions } from "vuex";
+import { mapActions } from "vuex";
 
 import PageHeader from "@/components/PageHeader";
 import Page from "@/components/Page";
@@ -135,9 +142,10 @@ import QueryList from "@/components/QueryList";
 
 const params = { version: 6, name: "civ6", label: "CIV-6 DATABASE", sublabel: "Search for internal configuration keys" };
 
+import ScrollIntoView from "scroll-into-view";
+
 export default {
   name: params.name,
-
   computed: {
     isSearchable() {
       return this.keyword.length > 2;
@@ -163,7 +171,6 @@ export default {
       return this.artefacts.length === 0;
     }
   },
-
   data() {
     return {
       page: params,
@@ -176,13 +183,27 @@ export default {
       showInfo: false
     };
   },
-
   created() {
     // on-page-load
     this.loading = false;
   },
-
+  mounted() {
+    // subscribe to event bus $emit
+    this.$root.$on("onReApplyQuery", keyword => {
+      this.keyword = keyword;
+      this.searchArtefacts();
+    });
+  },
   methods: {
+    ...mapActions([
+      'addQuery' // store.actions.addQuery()
+    ]),
+    gotoTop: function () {
+      ScrollIntoView(document.getElementById('page-top'));
+    },
+    gotoQueries: function () {
+      ScrollIntoView(document.getElementById('query-list'));
+    },
     onShowInfo: function() {
       this.showInfo = !this.showInfo;
     },
@@ -199,9 +220,12 @@ export default {
       HTTP.get(searchQuery)
         .then(response => prepareArtefactsData(response.data))
         .then(results => {
-          this.$store.dispatch('addQuery', self.keyword);
-          this.artefacts = results;
-          // console.log('> searchArtefacts:', { keyword: self.keyword, results: results })
+          // persist on redux
+          if (results.length) {
+            self.addQuery(self.keyword); // addQuery === mapped action
+          }
+          // load data to list
+          self.artefacts = results;
           self.loading = false;
         })
         .catch(e => {
@@ -229,12 +253,17 @@ export default {
 @import "@/styles/index.scss";
 
 .civ-6 {
+  .search-container,
+  .queries-container {
+    min-height: calc(#{$content-height} - 60px);
+  }
+
   .search-container {
     max-width: 800px;
+    border-right: 2px dotted rgba(0, 0, 0, 0.1);
   }
 
   .queries-container {
-    // max-width: 400px;
     overflow: auto;
   }
 
@@ -246,9 +275,16 @@ export default {
 
     & .md-icon {
       position: relative;
+      top: 12px;
       left: 10px;
-      opacity: 0.5;
+      opacity: 0.4;
     }
+  }
+
+  .search-goto-queries,
+  .search-goto-top {
+    display: none;
+    float: right;
   }
 
   .vue-back-to-top {
@@ -264,10 +300,6 @@ export default {
     color: red;
   }
 
-  // .md-layout-item {
-  //   border: 1px solid rgba(0,0,0,.12);
-  // }
-
   .item--header {
     color: navy;
     margin-top: $size-m;
@@ -278,8 +310,8 @@ export default {
     border-top: 1px solid rgba(0, 0, 0, 0.12);
   }
 
-  .item--key {
-    padding: $size-xs;
+  .md-layout-item .item--key {
+    padding: $size-xs $size-xs $size-xs $size-l;
   }
 
   .item--value {
@@ -333,14 +365,17 @@ export default {
       width: 100%;
       margin-bottom: $size-s;
     }
+    .search-container {
+      border-right: none;
+    }
+    .search-goto-queries,
+    .search-goto-top {
+      display: inline-flex;
+    }
     .item--key {
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
-    }
-    .vue-back-to-top {
-      right: 25vw;
-      opacity: 1;
     }
   }
 }

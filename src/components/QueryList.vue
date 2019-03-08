@@ -1,40 +1,54 @@
 <template>
   <div class="query-list coa-padding-s">
-    <h3>LAST QUERIES</h3>
-    <div v-if="hasItems">
-      <md-chips
-        v-model="queryList"
-        md-clickable
-        md-deletable
-        @md-click="onQueryClick"
-        @md-delete="onRemoveClick"
-      ></md-chips>
+    <div>
+      <md-list>
+        <md-subheader>LAST QUERIES</md-subheader>
+        <div v-if="hasItems">
+          <md-list-item
+            v-for="(query, index) of queries"
+            :key="index"
+            @click="onQueryClick($event, query)"
+          >
+            <span class="md-list-item-text">{{ query }}</span>
+            <md-button
+              class="md-icon-button md-accent"
+              @click="onRemoveClick($event, index)"
+            >
+              <md-icon>clear</md-icon>
+            </md-button>
+          </md-list-item>
+        </div>
+      </md-list>
     </div>
   </div>
 </template>
 
 <script>
-// import { mapGetters } from "vuex";
+import { mapActions } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
   name: "QueryList",
   computed: {
-    queryList() {
-      return this.$store.getters.queries;
-    },
+    ...mapGetters([
+      "queries" // this.store.state.queries
+    ]),
     hasItems() {
-      return this.queryList && this.queryList.length;
+      return this.queries && this.queries.length;
     }
   },
   methods: {
-    onQueryClick(str, index) {
-      console.log(`>> onQueryClick: ${JSON.stringify(str)}, index: ${index}`);
-      // this.$store.dispatch("addQuery", str);
-      // TODO: call parent method to re-execute given search
+    ...mapActions(["removeQuery"]),
+    // re-execute search with this keyword
+    onQueryClick(ev, keyword) {
+      // emit to event bus
+      this.$root.$emit("onReApplyQuery", keyword);
     },
-    onRemoveClick(str, index) {
-      console.log(`>> onRemoveClick: ${JSON.stringify(str)}, index: ${index}`);
-      this.$store.dispatch("removeQuery", str);
+    // remove query from the list
+    onRemoveClick(ev, index) {
+      ev.preventDefault();
+      ev.stopPropagation();
+      this.removeQuery(index); // mapped action
     }
   }
 };
@@ -44,7 +58,7 @@ export default {
 @import "@/styles/index.scss";
 
 .query-list {
-  background-color: $color-grey-ligth;
-  border-left: 2px solid $color-primary-dark;
+  min-height: calc(#{$content-height} - 50px);
+  background-color: $color-white;
 }
 </style>

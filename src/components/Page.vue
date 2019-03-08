@@ -36,12 +36,6 @@ export default {
 <style lang="scss">
 @import "@/styles/index.scss";
 
-$header-height: 115px;
-$max-height: calc(100vh - #{$header-height}); // -top bar
-$header-height: 100px;
-$footer-height: 140px;
-$content-height: calc(#{$max-height} - 250px);
-
 .page {
   margin: 0;
   padding: 0;

@@ -5,3 +5,9 @@ $size-m: 20px; /// default
 $size-l: 40px;
 $size-xl: 80px;
 $size-xxl: 140px;
+
+$header-height: 115px;
+$max-height: calc(100vh - #{$header-height}); // -top bar
+$header-height: 100px;
+$footer-height: 140px;
+$content-height: calc(#{$max-height} - 250px);

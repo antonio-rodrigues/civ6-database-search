@@ -53,6 +53,7 @@ export default {
   },
   methods: {
     onChangeLanguage(e) {
+      // event bus; consume anywhere with this.$on() or <Component @onLanguageChange="doFoo" />
       this.$emit("onLanguageChange", e.target.value);
     }
   }

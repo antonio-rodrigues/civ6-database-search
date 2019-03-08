@@ -46,6 +46,9 @@ export default {
 
     &--subheader {
       color: $color-grey;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 }
