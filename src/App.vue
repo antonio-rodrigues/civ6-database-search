@@ -17,7 +17,7 @@
             <md-avatar class="md-small">
               <img src="@/assets/coa-flag.jpg" alt="avatar" />
             </md-avatar>
-            <span class="md-title">C-O-A</span>
+            <span class="md-title">Coat of Arms</span>
           </div>
 
           <div class="md-toolbar-section-end">
@@ -161,7 +161,7 @@ export default {
 }
 
 .md-app-toolbar {
-  height: 115px;
+  height: 90px;
 }
 
 .md-drawer {
