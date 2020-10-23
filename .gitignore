@@ -19,3 +19,6 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw*
+
+# Http test files (use: VSCode extension HTTP Client)
+*.http
