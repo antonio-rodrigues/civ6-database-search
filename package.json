@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "dotenv": "^8.2.0",
     "scroll-into-view": "^1.9.3",
     "vue": "^2.6.6",
     "vue-backtotop": "^1.6.1",
