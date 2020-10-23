@@ -17,7 +17,7 @@
             <md-avatar class="md-small">
               <img src="@/assets/coa-flag.jpg" alt="avatar" />
             </md-avatar>
-            <span class="md-title">C-O-A</span>
+            <span class="md-title">Coat of Arms</span>
           </div>
 
           <div class="md-toolbar-section-end">
@@ -29,7 +29,7 @@
           </div>
         </div>
 
-        <div class="md-toolbar-row">
+        <!-- <div class="md-toolbar-row">
           <div class="coa-nav-bar">
             <md-tabs class="md-primary" md-sync-route>
               <md-tab id="tab-home" md-label="Home" to="/"></md-tab>
@@ -66,10 +66,10 @@
               <md-tab id="tab-favorites" md-label="About" to="/about"></md-tab>
             </md-tabs>
           </div>
-        </div>
+        </div> -->
       </md-app-toolbar>
 
-      <md-app-drawer :md-active.sync="menuVisible">
+      <!-- <md-app-drawer :md-active.sync="menuVisible">
         <md-toolbar class="md-transparent" md-elevation="0">Options</md-toolbar>
         <md-list>
           <md-list-item>
@@ -101,7 +101,8 @@
             <span class="md-list-item-text">About</span>
           </md-list-item>
         </md-list>
-      </md-app-drawer>
+      </md-app-drawer> -->
+
       <md-app-content>
         <keep-alive>
           <router-view />
@@ -160,7 +161,7 @@ export default {
 }
 
 .md-app-toolbar {
-  height: 115px;
+  height: 90px;
 }
 
 .md-drawer {
