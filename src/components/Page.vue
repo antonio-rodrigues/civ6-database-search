@@ -14,7 +14,7 @@
         id="page-bottom"
         class="md-layout-item md-size-100 page-layout--footer"
       >
-        <PageFooter>[ footer here ]</PageFooter>
+        <PageFooter>coa@2020</PageFooter>
       </div>
     </div>
   </div>
