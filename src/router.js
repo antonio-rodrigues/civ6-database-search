@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Home from "./views/pages/home/home.vue";
+// import Home from "./views/pages/home/home.vue";
 import About from "./views/pages/about/about.vue";
 import Civ1 from "./views/pages/civ1/civ1.vue";
 import Civ2 from "./views/pages/civ2/civ2.vue";
@@ -18,7 +18,7 @@ export default new Router({
     {
       path: "/",
       name: "home",
-      component: Home
+      component: Civ6
     },
     {
       path: "/about",
