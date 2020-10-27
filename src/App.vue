@@ -161,7 +161,7 @@ export default {
 }
 
 .md-app-toolbar {
-  height: 90px;
+  height: $header-height;
 }
 
 .md-drawer {

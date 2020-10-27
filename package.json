@@ -12,24 +12,24 @@
     "lint-fix": "vue-cli-service lint --fix"
   },
   "dependencies": {
-    "axios": "^0.18.0",
-    "scroll-into-view": "^1.9.3",
-    "vue": "^2.6.6",
+    "axios": "^0.21.0",
+    "scroll-into-view": "^1.15.0",
+    "vue": "^2.6.12",
     "vue-backtotop": "^1.6.1",
-    "vue-material": "^1.0.0-beta-10.2",
+    "vue-material": "^1.0.0-beta-15",
     "vue-router": "3.0.1",
     "vue-scroll-progressbar": "^0.1.4",
-    "vue-scrollto": "^2.14.0",
-    "vuex": "^3.0.1"
+    "vue-scrollto": "^2.19.1",
+    "vuex": "^3.5.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.4.1",
     "@vue/cli-plugin-eslint": "^3.4.1",
     "@vue/cli-service": "^3.4.1",
     "@vue/eslint-config-prettier": "^4.0.1",
-    "node-sass": "^4.11.0",
+    "node-sass": "^4.14.1",
     "sass-loader": "^7.0.1",
-    "vue-template-compiler": "^2.6.6"
+    "vue-template-compiler": "^2.6.12"
   },
   "browserslist": [
     "> 1%",
