@@ -7,6 +7,7 @@
 </template>
 
 <script>
+/* eslint no-console: 0 */
 import Page from "@/components/Page";
 const settings = { version: 5, name: "civ5", label: "CIV-5" };
 

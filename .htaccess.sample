@@ -1,0 +1,14 @@
+#Comment | Force all URLs to https WITH www
+#RewriteCond %{SERVER_PORT} 80
+#RewriteRule ^(.*)$ https://www.example.com/$1 [R,L]
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  RewriteCond %{HTTPS} off
+  RewriteRule ^(.*)$ https://www.acloudfor4.com/$1 [L,R=301]
+  RewriteRule ^index\.html$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /index.html [L]
+</IfModule>

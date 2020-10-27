@@ -7,6 +7,7 @@
 </template>
 
 <script>
+/* eslint no-console: 0 */
 const page = { version: 0, name: "NotFound", label: "404 PAGE NOT FOUND" };
 
 export default {
